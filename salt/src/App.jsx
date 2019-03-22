@@ -15,7 +15,8 @@ class App extends Component {
     recipes: [],
     ingredients: [],
     plans: [],
-    currentMainContainer: "Library"
+    currentMainContainer: "Library",
+    selectedRecipeId: undefined
   };
 
   componentDidMount() {
@@ -32,11 +33,16 @@ class App extends Component {
         return (
           <LibraryContainer
             recipes={this.state.recipes}
+            selectedRecipe={this.selectedRecipe}
             changeMainContState={this.changeMainContState}
           />
         );
       case "Recipe":
-        return <RecipeContainer />;
+        return (
+          this.state.selectedRecipeId && (
+            <RecipeContainer recipe={this.findSelectedRecipe()} />
+          )
+        );
       case "Plan":
         return <MealPlanListContainer />;
       case "List":
@@ -52,6 +58,20 @@ class App extends Component {
     this.setState({
       currentMainContainer: containerLabel
     });
+  };
+
+  selectedRecipe = recipeId => {
+    this.setState({
+      selectedRecipeId: recipeId
+    });
+  };
+
+  findSelectedRecipe = () => {
+    if (this.state.selectedRecipeId === undefined) return;
+
+    return this.state.recipes.find(
+      recipe => recipe.id === this.state.selectedRecipeId
+    );
   };
 
   // ShowCardDetails = () = > {

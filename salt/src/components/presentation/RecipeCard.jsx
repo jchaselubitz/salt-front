@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 
 const RecipeCard = props => {
+  const handleClick = () => {
+    props.selectedRecipe(props.recipe.id);
+    props.handleContChange("Recipe");
+  };
+
   return (
-    <div onClick={() => props.handleClick("Recipe")} value="Recipe">
+    <div onClick={handleClick} value="Recipe">
       <img
         className="recipe_img"
         src={props.recipe.image}

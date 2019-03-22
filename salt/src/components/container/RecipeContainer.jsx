@@ -12,7 +12,8 @@ class RecipeContainer extends Component {
     return (
       <div>
         {/* <ContainerNavComponent /> */}
-        WORKS
+        <RecipeDetails recipe={this.props.recipe} />
+
         {/*  rendered conditionaly {<RecipeDetails /> 
                 <NewRecipeForm /> } */}
       </div>
