@@ -9,7 +9,10 @@ class LibraryContainer extends Component {
       <div>
         {/* <ContainerNavComponent /> */}
         <h1>Library</h1>
-        <RecipeBlockListComponent recipes={this.props.recipes} />
+        <RecipeBlockListComponent
+          recipes={this.props.recipes}
+          handleClick={this.props.changeMainContState}
+        />
       </div>
     );
   }

@@ -5,11 +5,14 @@ import NewRecipeForm from "../presentation/NewRecipeForm";
 
 class RecipeContainer extends Component {
   state = {};
+
+  renderRecipeCard = () => {};
+
   render() {
     return (
       <div>
-        <ContainerNavComponent />
-
+        {/* <ContainerNavComponent /> */}
+        WORKS
         {/*  rendered conditionaly {<RecipeDetails /> 
                 <NewRecipeForm /> } */}
       </div>

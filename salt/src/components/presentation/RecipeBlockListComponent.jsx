@@ -12,7 +12,7 @@ class RecipeBlockListComponent extends Component {
     return (
       <div>
         {this.props.recipes.map(recipe => (
-          <RecipeCard recipe={recipe} />
+          <RecipeCard recipe={recipe} handleClick={this.props.handleClick} />
         ))}
       </div>
     );

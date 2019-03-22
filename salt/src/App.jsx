@@ -29,7 +29,12 @@ class App extends Component {
       case "Home":
         return <Home />;
       case "Library":
-        return <LibraryContainer recipes={this.state.recipes} />;
+        return (
+          <LibraryContainer
+            recipes={this.state.recipes}
+            changeMainContState={this.changeMainContState}
+          />
+        );
       case "Recipe":
         return <RecipeContainer />;
       case "Plan":
@@ -43,6 +48,16 @@ class App extends Component {
     }
   };
 
+  changeMainContState = containerLabel => {
+    this.setState({
+      currentMainContainer: containerLabel
+    });
+  };
+
+  // ShowCardDetails = () = > {
+  //   //change state.currentMainContainer
+  //   //sends detail props to new container
+  // }
   render() {
     return (
       <div className="App">
