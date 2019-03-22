@@ -15,7 +15,7 @@ class App extends Component {
     recipes: [],
     ingredients: [],
     plans: [],
-    currentMainContainer: "Library",
+    currentMainContainer: undefined,
     selectedRecipeId: undefined
   };
 
@@ -62,6 +62,10 @@ class App extends Component {
     });
   };
 
+  NavController = (label) => {
+    this.changeMainContState(label)
+  }
+
   selectedRecipe = recipeId => {
     this.setState({
       selectedRecipeId: recipeId
@@ -81,12 +85,12 @@ class App extends Component {
     this.changeMainContState(label);
   };
 
+ 
 
   render() {
     return (
       <div className="App">
-        {/* <MainNavContainer /> */}
-
+        <MainNavContainer handleClick={this.NavController}/>
         {this.displayMainCont()}
       </div>
     );
