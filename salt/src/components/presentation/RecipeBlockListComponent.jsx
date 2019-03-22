@@ -1,13 +1,22 @@
 import React, { Component } from "react";
 import RecipeCard from "./RecipeCard";
 
-class BlockListComponent extends Component {
+class RecipeBlockListComponent extends Component {
   state = {};
+
+  // renderRecipeCard = () => {
+  //   return this.props.recipes.map(recipe =>  <RecipeCard recipe={recipe} />)
+  // }
+
   render() {
-    return {
-      /*  map over and create <RecipeCard />*/
-    };
+    return (
+      <div>
+        {this.props.recipes.map(recipe => (
+          <RecipeCard recipe={recipe} />
+        ))}
+      </div>
+    );
   }
 }
 
-export default BlockListComponent;
+export default RecipeBlockListComponent;

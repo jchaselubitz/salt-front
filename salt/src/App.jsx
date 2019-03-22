@@ -8,21 +8,28 @@ import RecipeContainer from "./components/container/RecipeContainer";
 import ShoppingListContainer from "./components/container/ShoppingListContainer";
 import SettingsContainer from "./components/container/SettingsContainer";
 import Home from "./components/container/Home";
+import API from "./api";
 
 class App extends Component {
   state = {
     recipes: [],
     ingredients: [],
     plans: [],
-    currentMainContainer: "Home"
+    currentMainContainer: "Library"
   };
+
+  componentDidMount() {
+    API.getRecipes().then(recipes => this.setState({ recipes }));
+    API.getIngredients().then(ingredients => this.setState({ ingredients }));
+    API.getPlans().then(plans => this.setState({ MealPlanListContainer }));
+  }
 
   displayMainCont = () => {
     switch (this.state.currentMainContainer) {
       case "Home":
         return <Home />;
       case "Library":
-        return <LibraryContainer />;
+        return <LibraryContainer recipes={this.state.recipes} />;
       case "Recipe":
         return <RecipeContainer />;
       case "Plan":
@@ -36,7 +43,6 @@ class App extends Component {
     }
   };
 
-  componentDidMount() {}
   render() {
     return (
       <div className="App">
