@@ -11,8 +11,7 @@ class LibraryContainer extends Component {
         <h1>Library</h1>
         <RecipeBlockListComponent
           recipes={this.props.recipes}
-          selectedRecipe={this.props.selectedRecipe}
-          handleContChange={this.props.changeMainContState}
+          handleClick={this.props.ShowCardDetails}
         />
       </div>
     );

@@ -33,8 +33,7 @@ class App extends Component {
         return (
           <LibraryContainer
             recipes={this.state.recipes}
-            selectedRecipe={this.selectedRecipe}
-            changeMainContState={this.changeMainContState}
+            ShowCardDetails ={this.ShowCardDetails}
           />
         );
       case "Recipe":
@@ -44,7 +43,10 @@ class App extends Component {
           )
         );
       case "Plan":
-        return <MealPlanListContainer />;
+        return <MealPlanListContainer 
+          recipes={this.state.recipes}
+          
+        />;
       case "List":
         return <ShoppingListContainer />;
       case "Settings":
@@ -74,10 +76,12 @@ class App extends Component {
     );
   };
 
-  // ShowCardDetails = () = > {
-  //   //change state.currentMainContainer
-  //   //sends detail props to new container
-  // }
+ ShowCardDetails = (recipeId,label) => {
+    this.selectedRecipe(recipeId);
+    this.changeMainContState(label);
+  };
+
+
   render() {
     return (
       <div className="App">
