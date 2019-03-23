@@ -6,7 +6,6 @@ import NewRecipeForm from "../presentation/NewRecipeForm";
 //BREADCRUMBS
 // app > library
 
-
 class RecipeContainer extends Component {
   state = {};
 
@@ -15,9 +14,13 @@ class RecipeContainer extends Component {
   render() {
     return (
       <div>
-        {/* <ContainerNavComponent /> */}
-        <RecipeDetails recipe={this.props.recipe} />
+        <ContainerNavComponent backButton={this.props.recipeBackButton} />
 
+        {this.props.recipe ? (
+          <RecipeDetails recipe={this.props.recipe} />
+        ) : (
+          <NewRecipeForm ingredients={this.props.ingredients} />
+        )}
         {/*  rendered conditionaly {<RecipeDetails /> 
                 <NewRecipeForm /> } */}
       </div>

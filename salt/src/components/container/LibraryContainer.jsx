@@ -7,7 +7,7 @@ class LibraryContainer extends Component {
   render() {
     return (
       <div>
-        {/* <ContainerNavComponent /> */}
+        <ContainerNavComponent addButton={this.props.recipeAddButton} />
         <h1>Library</h1>
         <RecipeBlockListComponent
           recipes={this.props.recipes}

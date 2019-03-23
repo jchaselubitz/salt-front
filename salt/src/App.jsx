@@ -32,21 +32,21 @@ class App extends Component {
       case "Library":
         return (
           <LibraryContainer
+            recipeAddButton={this.recipeAddButton}
             recipes={this.state.recipes}
-            ShowCardDetails ={this.ShowCardDetails}
+            ShowCardDetails={this.ShowCardDetails}
           />
         );
       case "Recipe":
         return (
-          this.state.selectedRecipeId && (
-            <RecipeContainer recipe={this.findSelectedRecipe()} />
-          )
+          <RecipeContainer
+            ingredients={this.state.ingredients}
+            recipe={this.findSelectedRecipe()}
+            recipeBackButton={this.recipeBackButton}
+          />
         );
       case "Plan":
-        return <MealPlanListContainer 
-          recipes={this.state.recipes}
-          
-        />;
+        return <MealPlanListContainer recipes={this.state.recipes} />;
       case "List":
         return <ShoppingListContainer />;
       case "Settings":
@@ -57,14 +57,15 @@ class App extends Component {
   };
 
   changeMainContState = containerLabel => {
+    this.deselectRecipeId(containerLabel);
     this.setState({
       currentMainContainer: containerLabel
     });
   };
 
-  NavController = (label) => {
-    this.changeMainContState(label)
-  }
+  NavController = label => {
+    this.changeMainContState(label);
+  };
 
   selectedRecipe = recipeId => {
     this.setState({
@@ -80,17 +81,35 @@ class App extends Component {
     );
   };
 
- ShowCardDetails = (recipeId,label) => {
+  ShowCardDetails = (recipeId, label) => {
     this.selectedRecipe(recipeId);
     this.changeMainContState(label);
   };
 
- 
+  recipeAddButton = () => {
+    if (this.state.currentMainContainer === "Library") {
+      this.changeMainContState("Recipe");
+    }
+  };
+
+  recipeBackButton = () => {
+    if (this.state.currentMainContainer === "Recipe") {
+      this.changeMainContState("Library");
+    }
+  };
+
+  deselectRecipeId = containerLabel => {
+    if (containerLabel === "Library") {
+      this.setState({
+        selectedRecipeId: undefined
+      });
+    }
+  };
 
   render() {
     return (
       <div className="App">
-        <MainNavContainer handleClick={this.NavController}/>
+        <MainNavContainer handleClick={this.NavController} />
         {this.displayMainCont()}
       </div>
     );
