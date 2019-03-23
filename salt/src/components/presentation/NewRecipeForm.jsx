@@ -19,16 +19,6 @@ class NewRecipeForm extends Component {
     ingredients: []
   };
 
-  addIngredient = () => {
-    this.setState(prevState => ({
-      ingredients: prevState.ingredients.concat([
-        {
-          value: ""
-        }
-      ])
-    }));
-  };
-
   handleFieldChange = event => {
     this.setState({
       [event.target.name]: event.target.value
