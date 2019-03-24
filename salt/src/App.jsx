@@ -16,13 +16,22 @@ class App extends Component {
     ingredients: [],
     plans: [],
     currentMainContainer: undefined,
-    selectedRecipeId: undefined
+    selectedRecipeId: undefined,
+    currentUser: null
   };
 
   componentDidMount() {
     API.getRecipes().then(recipes => this.setState({ recipes }));
     API.getIngredients().then(ingredients => this.setState({ ingredients }));
     API.getPlans().then(plans => this.setState({ MealPlanListContainer }));
+  }
+
+// FOR LOGIN
+  setCurrentUser = () => {
+    API.getProfile()
+    .then (resp => {
+      this.setState({ currentUser: resp });
+    })
   }
 
   displayMainCont = () => {
