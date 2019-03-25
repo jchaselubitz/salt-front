@@ -8,11 +8,10 @@ import RecipeContainer from "./components/container/RecipeContainer";
 import ShoppingListContainer from "./components/container/ShoppingListContainer";
 import SettingsContainer from "./components/container/SettingsContainer";
 import Home from "./components/container/Home";
-import Login from "./components/container/Login"
+import Login from "./components/container/Login";
 import API from "./api";
 
 class App extends Component {
-
   state = {
     recipes: [],
     ingredients: [],
@@ -27,42 +26,42 @@ class App extends Component {
     API.getIngredients().then(ingredients => this.setState({ ingredients }));
     API.getPlans().then(plans => this.setState({ MealPlanListContainer }));
     API.getProfile()
-    // .then (resp => console.log("getProfileResp:",resp))
-    .then ( userObject => {
-      
-      if (userObject.error) {
-          this.logout()
+      // .then (resp => console.log("getProfileResp:",resp))
+      .then(userObject => {
+        if (userObject.error) {
+          this.logout();
         } else {
-          this.setUser(userObject)
-          this.props.history.push('/home')
+          this.setUser(userObject);
+          this.props.history.push("/home");
         }
+      });
+  }
+
+  //============================= LOGIN/AUTH ==============================================
+
+  login = event => {
+    event.preventDefault();
+    API.loginPost(event.target.email.value, event.target.password.value).then(
+      userObject => {
+        loginSetUser(userObject);
       }
-    )
-  }
-
-//============================= LOGIN/AUTH ==============================================
-
-  login = (event) => {
-    event.preventDefault()
-    API.loginPost(event.target.email.value, event.target.password.value)
-    .then(userObject => {loginSetUser(userObject);
-    })
-    const loginSetUser = (userObject) => {
-      let userEmail = userObject.user.email
-      let token = userObject.token
-      localStorage.setItem('token', token)
-      this.setState({ currentUser : userEmail })
-    }
-  }
+    );
+    const loginSetUser = userObject => {
+      let userEmail = userObject.user.email;
+      let token = userObject.token;
+      localStorage.setItem("token", token);
+      this.setState({ currentUser: userEmail });
+    };
+  };
 
   setUser = userObject => {
-    this.setState({ currentUser : userObject.user.email })
-  }  
+    this.setState({ currentUser: userObject.user.email });
+  };
 
   logout = () => {
-    localStorage.removeItem('token', )
-    this.setState({ currentUser: undefined  });
-  }
+    localStorage.removeItem("token");
+    this.setState({ currentUser: undefined });
+  };
 
   //============================= DRAW APPLICATIONS ==============================================
 
@@ -71,11 +70,7 @@ class App extends Component {
       case "Home":
         return <Home />;
       case "Login":
-        return (
-          <Login
-            login={this.login}
-          />
-        );
+        return <Login login={this.login} />;
       case "Library":
         return (
           <LibraryContainer
@@ -87,13 +82,19 @@ class App extends Component {
       case "Recipe":
         return (
           <RecipeContainer
+            addNewRecipe={this.addNewRecipe}
             ingredients={this.state.ingredients}
             recipe={this.findSelectedRecipe()}
             recipeBackButton={this.recipeBackButton}
           />
         );
       case "Plan":
-        return <MealPlanListContainer recipes={this.state.recipes} addNewPlan={this.addNewPlan} />;
+        return (
+          <MealPlanListContainer
+            recipes={this.state.recipes}
+            addNewPlan={this.addNewPlan}
+          />
+        );
       case "List":
         return <ShoppingListContainer />;
       case "Settings":
@@ -113,7 +114,6 @@ class App extends Component {
   NavController = label => {
     this.changeMainContState(label);
   };
-
 
   selectedRecipe = recipeId => {
     this.setState({
@@ -154,10 +154,25 @@ class App extends Component {
     }
   };
 
-  addNewPlan = (planObject) => {
-    API.CreatePlans(planObject)
-    .then(returnedObject => console.log("CreatePlans return", returnedObject))
-  }
+  addNewPlan = planObject => {
+    API.CreatePlans(planObject).then(returnedObject =>
+      console.log("CreatePlans return", returnedObject)
+    );
+  };
+
+  addNewRecipe = recipe => {
+    const options = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(recipe)
+    };
+
+    API.postRecipe(options).then(recipe => console.log(recipe));
+
+    // .then(recipe =>
+    //   this.setState({ recipes: [...this.state.recipes, recipe] })
+    // );
+  };
 
   render() {
     return (

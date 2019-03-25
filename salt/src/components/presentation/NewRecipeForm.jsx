@@ -15,63 +15,64 @@ class NewRecipeForm extends Component {
     name: "",
     image: "",
     instructions: "",
-    // ingredients: [{ name: "", qty: "", unit: "", category: "" }]
-    ingredients: []
-  };
-
-  addIngredient = () => {
-    this.setState(prevState => ({
-      ingredients: prevState.ingredients.concat([
-        {
-          value: ""
-        }
-      ])
-    }));
+    ingredients: [
+      { ingredient_name: "", qty: "", unit: "", ingredient_category: "" }
+    ]
   };
 
   handleFieldChange = event => {
+    if (
+      ["ingredient_name", "qty", "unit", "ingredient_category"].includes(
+        event.target.name
+      )
+    ) {
+      let ingredients = [...this.state.ingredients];
+      ingredients[event.target.dataset.id][event.target.name] =
+        event.target.value;
+      this.setState({ ingredients });
+    } else {
+      this.setState({ [event.target.name]: event.target.value });
+    }
+  };
+
+  addIngredient = event => {
+    event.preventDefault();
     this.setState({
-      [event.target.name]: event.target.value
+      ingredients: [
+        ...this.state.ingredients,
+        { ingredient_name: "", qty: "", unit: "", ingredient_category: "" }
+      ]
     });
   };
 
-  updateCategory = event => {
-    // this.setState({
-    //   sortBy: event.target.value
-    // });
-    console.log(event.target.value);
+  removeIngredient = index => {
+    this.state.ingredients.splice(index, 1);
+
+    this.setState({
+      ingredients: this.state.ingredients
+    });
   };
 
-  updateUnit = event => {
-    // this.setState({
-    //   sortBy: event.target.value
-    // });
-    console.log(event.target.value);
+  handleFormSubmit = event => {
+    event.preventDefault();
+    let newRecipe = this.state;
+    this.props.addNewRecipe(newRecipe);
   };
-  updateQty = event => {
-    // this.setState({
-    //   sortBy: event.target.value
-    // });
-    console.log(event.target.value);
-  };
-  update = event => {
-    // this.setState({
-    //   sortBy: event.target.value
-    // });
-    console.log(event.target.value);
-  };
+
   render() {
     return (
       <div>
         <h1>New Recipe</h1>
-        <form onSubmit={this.handleFormSubmit}>
+        <form
+          onSubmit={this.handleFormSubmit}
+          onChange={this.handleFieldChange}
+        >
           <input
             fluid
             label="Name"
             placeholder="Name"
             name="name"
             value={this.state.name}
-            onChange={this.handleFieldChange}
           />
           <br />
           <input
@@ -81,7 +82,6 @@ class NewRecipeForm extends Component {
             placeholder="Image"
             name="image"
             value={this.state.image}
-            onChange={this.handleFieldChange}
           />
           <br />
           <textarea
@@ -90,47 +90,71 @@ class NewRecipeForm extends Component {
             placeholder="Instructions"
             name="instructions"
             value={this.state.instructions}
-            onChange={this.handleFieldChange}
           />
           <br />
 
-          {/* <label>Ingredient</label>
-          <br />
-          <input
-            list="ingredient_name"
-            name="ingredient_name"
-            label="Ingredient Name"
-          />
+          <h2>Ingredients</h2>
+          {this.state.ingredients.map((ingredient, index) => {
+            return (
+              <div key={index}>
+                {/* ingredient name  */}
+                <input
+                  list="ingredient_name"
+                  data-id={index}
+                  name="ingredient_name"
+                  //   value={ingredient.ingredient_name}
+                />
+                <datalist
+                  id="ingredient_name"
+                  name="ingredient_name"
+                  data-id={index}
+                >
+                  {this.props.ingredients.map(ing => (
+                    <option value={ing.name} />
+                  ))}
+                </datalist>
 
-          <datalist id="ingredient_name" inonChange={this.updateIngredientName}>
-            {this.props.ingredients.map(ing => (
-              <option value={ing.name} />
-            ))}
-          </datalist>
-          <br />
-          <label>Category</label>
-          <select onChange={this.updateCategory}>
-            {CATEGORY.map(category => (
-              <option value={category}>{category}</option>
-            ))}
-          </select>
-          <br />
-          <input
-            type="number"
-            fluid
-            label="Qty"
-            placeholder="Quantity"
-            name="qty"
-            onChange={this.updateQty}
-          />
-          <br />
-          <label>Unit</label>
-          <select onChange={this.updateUnit}>
-            {UNITS.map(unit => (
-              <option value={unit}>{unit}</option>
-            ))}
-          </select>
-          <br /> */}
+                {/* ingredient qty */}
+
+                <input
+                  type="number"
+                  fluid
+                  data-id={index}
+                  label="Qty"
+                  placeholder="Quantity"
+                  name="qty"
+                  value={ingredient.qty}
+                />
+
+                {/* ingredient units */}
+                {/* <input list="units" value={ingredient.unit} /> */}
+                <select id="units" name="unit" data-id={index}>
+                  <option value="" disabled selected>
+                    units
+                  </option>
+                  {UNITS.map(unit => (
+                    <option value={unit}>{unit}</option>
+                  ))}
+                </select>
+
+                {/* ingredient ingredient category */}
+
+                <select name="ingredient_category" data-id={index}>
+                  <option value="" disabled selected>
+                    Ingredient category
+                  </option>
+                  {CATEGORY.map(category => (
+                    <option value={category}>{category}</option>
+                  ))}
+                </select>
+
+                <button onClick={() => this.removeIngredient(index)}>
+                  Remove
+                </button>
+              </div>
+            );
+          })}
+          <button onClick={this.addIngredient}>Add Ingredient</button>
           <button>Submit</button>
         </form>
       </div>

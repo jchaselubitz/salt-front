@@ -8,20 +8,18 @@ const recipeQtyIngredientsUrl = `${baseUrl}/recipe_qty_ingredients`;
 const profileUrl = `${baseUrl}/profile`;
 const loginUrl = `${baseUrl}/login`;
 
-
 //============================= AUTH/LOGIN FUNCTIONS ==============================================
 
-
 const loginPost = (email, password) => {
-  return loginCall(loginUrl, email, password)
-}
+  return loginCall(loginUrl, email, password);
+};
 
 const loginCall = (url, email, password) => {
   const options = {
-    method: 'POST', 
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
-    Accept: 'application/json'
+      "Content-Type": "application/json",
+      Accept: "application/json"
     },
     body: JSON.stringify({
       user: {
@@ -29,26 +27,21 @@ const loginCall = (url, email, password) => {
         password: password
       }
     })
-  }
-  return fetch(url, options)
-    .then(resp => resp.json())
-  
-}
+  };
+  return fetch(url, options).then(resp => resp.json());
+};
 
 const getProfile = () => {
   const options = {
-    method: 'GET',
+    method: "GET",
     headers: {
       Authorization: localStorage.getItem("token")
     }
-  }
-  return fetch(profileUrl, options)
-    .then(resp => resp.json())
+  };
+  return fetch(profileUrl, options).then(resp => resp.json());
 };
 
 //============================= GET FUNCTIONS ==============================================
-
-
 
 const getRecipes = () => {
   return getFunction(recipeUrl);
@@ -78,22 +71,16 @@ const getFunction = url => {
   return fetch(url).then(resp => resp.json());
 };
 
-
-
 //============================= POST FUNCTIONS ==============================================
-
-const CreateRecipes = () => {
-  return postFunction(recipeUrl);
-};
 
 const CreateIngredients = () => {
   return postFunction(ingredientUrl);
 };
 
-const CreatePlans = (input) => {
+const CreatePlans = input => {
   const options = {
-    method: 'POST', 
-    headers: { 'Content-Type': 'application/json'},
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       calendar: {
         start_date: input.plan.start_date,
@@ -101,9 +88,9 @@ const CreatePlans = (input) => {
         index_calendars_on_user_id: input.plan.recipeIds
       }
     })
-  }
+  };
   return postFunction(planUrl, options);
-}
+};
 
 const CreateUsers = () => {
   return postFunction(usersUrl);
@@ -117,12 +104,13 @@ const CreateRecipeQtyIngredients = () => {
   return postFunction(recipeQtyIngredientsUrl);
 };
 
-const postFunction = (url,options) => {
-  return fetch(url, options)
-    .then(resp => resp.json())
+const postRecipe = options => {
+  return postFunction(recipeUrl, options);
+};
 
-}
-
+const postFunction = (url, options) => {
+  return fetch(url, options).then(resp => resp.json());
+};
 
 export default {
   getProfile,
@@ -133,10 +121,10 @@ export default {
   getRecipePlans,
   getRecipeQtyIngredients,
   loginPost,
-  CreateRecipes,
   CreateIngredients,
   CreatePlans,
   CreateUsers,
   CreateRecipePlans,
-  CreateRecipeQtyIngredients
+  CreateRecipeQtyIngredients,
+  postRecipe
 };
