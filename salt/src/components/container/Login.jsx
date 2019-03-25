@@ -8,7 +8,7 @@ const Login = (props) => {
       <form onSubmit={props.login}>
        <input type="text" name="email"/>
        <input type="text" name="password"/>
-       <input type="submit"/>
+       <button value="submit">Log In</button>
       </form>
     </div>
    );

@@ -35,12 +35,11 @@ const loginCall = (url, email, password) => {
   
 }
 
-
 const getProfile = () => {
   const options = {
     method: 'GET',
     headers: {
-      Authorization: `Bearer <token>`
+      Authorization: localStorage.getItem("token")
     }
   }
   return fetch(profileUrl, options)

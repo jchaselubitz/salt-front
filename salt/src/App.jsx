@@ -25,23 +25,45 @@ class App extends Component {
     API.getRecipes().then(recipes => this.setState({ recipes }));
     API.getIngredients().then(ingredients => this.setState({ ingredients }));
     API.getPlans().then(plans => this.setState({ MealPlanListContainer }));
+    API.getProfile()
+    // .then (resp => console.log("getProfileResp:",resp))
+    .then ( userObject => {
+      
+      if (userObject.error) {
+          this.logout()
+        } else {
+          this.setUser(userObject)
+          this.props.history.push('/home')
+        }
+      }
+    )
   }
 
-// FOR LOGIN
-  // setCurrentUser = () => {
-  //   API.getProfile()
-  //   .then (resp => {
-  //     this.setState({ currentUser: resp });
-  //   })
-  // }
+//============================= LOGIN/AUTH ==============================================
 
   login = (event) => {
     event.preventDefault()
     API.loginPost(event.target.email.value, event.target.password.value)
-    .then( resp => 
-      this.setState({ currentUser : resp })
-    )
+    .then(userObject => {loginSetUser(userObject);
+    })
+    const loginSetUser = (userObject) => {
+      let userEmail = userObject.user.email
+      let token = userObject.token
+      localStorage.setItem('token', token)
+      this.setState({ currentUser : userEmail })
+    }
   }
+
+  setUser = userObject => {
+    this.setState({ currentUser : userObject.user.email })
+  }  
+
+  logout = () => {
+    localStorage.removeItem('token', )
+    this.setState({ currentUser: undefined  });
+  }
+
+  //============================= DRAW APPLICATIONS ==============================================
 
   displayMainCont = () => {
     switch (this.state.currentMainContainer) {
@@ -91,6 +113,7 @@ class App extends Component {
     this.changeMainContState(label);
   };
 
+
   selectedRecipe = recipeId => {
     this.setState({
       selectedRecipeId: recipeId
@@ -129,6 +152,10 @@ class App extends Component {
       });
     }
   };
+
+  addNewPlan = (event) => {
+    console.log("add Plan:", )
+  }
 
   render() {
     return (

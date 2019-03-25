@@ -15,7 +15,7 @@ class MealPlanListContainer extends Component {
 
   newPlan = () => {
     if (this.state.createNew === true) {
-      return <CreatePlanForm recipes={this.props.recipes}/>
+      return <CreatePlanForm recipes={this.props.recipes} addNewPlan={this.props.addNewPlan}/>
     }
   }
 
