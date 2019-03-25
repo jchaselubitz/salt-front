@@ -25,31 +25,57 @@ class NewRecipeForm extends Component {
     });
   };
 
-  updateCategory = event => {
-    // this.setState({
-    //   sortBy: event.target.value
-    // });
-    console.log(event.target.value);
+  //   updateCategory = event => {
+  //     // this.setState({
+  //     //   sortBy: event.target.value
+  //     // });
+  //     console.log(event.target.value);
+  //   };
+
+  //   updateUnit = event => {
+  //     // this.setState({
+  //     //   sortBy: event.target.value
+  //     // });
+  //     console.log(event.target.value);
+  //   };
+  //   updateQty = event => {
+  //     // this.setState({
+  //     //   sortBy: event.target.value
+  //     // });
+  //     console.log(event.target.value);
+  //   };
+  //   update = event => {
+  //     // this.setState({
+  //     //   sortBy: event.target.value
+  //     // });
+  //     console.log(event.target.value);
+  //   };
+
+  addIngredient = event => {
+    event.preventDefault();
+    this.setState({
+      ingredients: [...this.state.ingredients, ""]
+    });
   };
 
-  updateUnit = event => {
-    // this.setState({
-    //   sortBy: event.target.value
-    // });
-    console.log(event.target.value);
+  handleIngredientChange = (event, index) => {
+    let ingredients = [...this.state.ingredients];
+    ingredients[index] = event.target.value;
+    // this.state.ingredients[index] = event.target.value;
+
+    this.setState({
+      ingredients: ingredients
+    });
   };
-  updateQty = event => {
-    // this.setState({
-    //   sortBy: event.target.value
-    // });
-    console.log(event.target.value);
+
+  removeIngredient = index => {
+    this.state.ingredients.splice(index, 1);
+
+    this.setState({
+      ingredients: this.state.ingredients
+    });
   };
-  update = event => {
-    // this.setState({
-    //   sortBy: event.target.value
-    // });
-    console.log(event.target.value);
-  };
+
   render() {
     return (
       <div>
@@ -84,6 +110,29 @@ class NewRecipeForm extends Component {
           />
           <br />
 
+          <h2>Ingredients</h2>
+          {this.state.ingredients.map((ingredient, index) => {
+            return (
+              <div key={index}>
+                <input
+                  list="ingredient_name"
+                  value={ingredient}
+                  onChange={event => this.handleIngredientChange(event, index)}
+                />
+                <datalist id="ingredient_name" name="name">
+                  {this.props.ingredients.map(ing => (
+                    <option value={ing.name} />
+                  ))}
+                </datalist>
+
+                <button onClick={() => this.removeIngredient(index)}>
+                  Remove
+                </button>
+              </div>
+            );
+          })}
+          <button onClick={this.addIngredient}>Add Ingredient</button>
+
           {/* <label>Ingredient</label>
           <br />
           <input
@@ -92,7 +141,7 @@ class NewRecipeForm extends Component {
             label="Ingredient Name"
           />
 
-          <datalist id="ingredient_name" inonChange={this.updateIngredientName}>
+          <datalist id="ingredient_name" onChange={this.updateIngredientName}>
             {this.props.ingredients.map(ing => (
               <option value={ing.name} />
             ))}
