@@ -8,6 +8,7 @@ import RecipeContainer from "./components/container/RecipeContainer";
 import ShoppingListContainer from "./components/container/ShoppingListContainer";
 import SettingsContainer from "./components/container/SettingsContainer";
 import Home from "./components/container/Home";
+import Login from "./components/container/Login"
 import API from "./api";
 
 class App extends Component {
@@ -15,9 +16,9 @@ class App extends Component {
     recipes: [],
     ingredients: [],
     plans: [],
-    currentMainContainer: undefined,
+    currentMainContainer: "Login",
     selectedRecipeId: undefined,
-    currentUser: null
+    currentUser: undefined
   };
 
   componentDidMount() {
@@ -27,17 +28,31 @@ class App extends Component {
   }
 
 // FOR LOGIN
-  setCurrentUser = () => {
-    API.getProfile()
-    .then (resp => {
-      this.setState({ currentUser: resp });
-    })
+  // setCurrentUser = () => {
+  //   API.getProfile()
+  //   .then (resp => {
+  //     this.setState({ currentUser: resp });
+  //   })
+  // }
+
+  login = (event) => {
+    event.preventDefault()
+    API.loginPost(event.target.email.value, event.target.password.value)
+    .then( resp => 
+      this.setState({ currentUser : resp })
+    )
   }
 
   displayMainCont = () => {
     switch (this.state.currentMainContainer) {
       case "Home":
         return <Home />;
+      case "Login":
+        return (
+          <Login
+            login={this.login}
+          />
+        );
       case "Library":
         return (
           <LibraryContainer

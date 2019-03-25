@@ -26,13 +26,6 @@ class CreatePlanForm extends Component {
         <div>
           <RecipeBlockListComponent recipes={this.props.recipes} handleClick={this.AddRecipeToPlan}/> 
         </div>
-        {/* {this.props.recipes.map(recipe => (
-            <RecipeCard
-              recipe={recipe} */}
-              // handleClick={this.props.AddRecipeToPlan}
-              // handleContChange={this.props.handleContChange}
-            />
-          ))}
       </div>
       </>
      );
