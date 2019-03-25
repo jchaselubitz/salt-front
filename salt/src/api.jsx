@@ -82,35 +82,46 @@ const getFunction = url => {
 
 //============================= POST FUNCTIONS ==============================================
 
+const CreateRecipes = () => {
+  return postFunction(recipeUrl);
+};
 
+const CreateIngredients = () => {
+  return postFunction(ingredientUrl);
+};
 
-//I THINK this is for the createUser form
+const CreatePlans = (input) => {
+  const options = {
+    method: 'POST', 
+    headers: { 'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      calendar: {
+        start_date: input.plan.start_date,
+        end_date: input.plan.end_date,
+        index_calendars_on_user_id: input.plan.recipeIds
+      }
+    })
+  }
+  return postFunction(planUrl, options);
+}
 
-// const postUser = () => {
-//   return postFunction(userUrl)
-// }
+const CreateUsers = () => {
+  return postFunction(usersUrl);
+};
 
-// postFunction = (url) => {
-//   const options = {
-//     method: 'POST', 
-//     headers: {
-//       'Content-Type': 'application/json',
-//     Accept: 'application/json'
-//     },
-//     body: JSON.stringify({
-//       user: {
-//         fullname: 'Shane Walsh', 
-//         email: "shanewalsh@test.com",
-//         password: 123
-//       }
-//     })
-//   }
-//   return fetch(url, options)
-//     .then(resp => resp.json())
-//     .then(resp => console.log(resp))
-// }
+const CreateRecipePlans = () => {
+  return postFunction(recipePlanUrl);
+};
 
+const CreateRecipeQtyIngredients = () => {
+  return postFunction(recipeQtyIngredientsUrl);
+};
 
+const postFunction = (url,options) => {
+  return fetch(url, options)
+    .then(resp => resp.json())
+
+}
 
 
 export default {
@@ -121,5 +132,11 @@ export default {
   getPlans,
   getRecipePlans,
   getRecipeQtyIngredients,
-  loginPost
+  loginPost,
+  CreateRecipes,
+  CreateIngredients,
+  CreatePlans,
+  CreateUsers,
+  CreateRecipePlans,
+  CreateRecipeQtyIngredients
 };

@@ -12,11 +12,12 @@ import Login from "./components/container/Login"
 import API from "./api";
 
 class App extends Component {
+
   state = {
     recipes: [],
     ingredients: [],
     plans: [],
-    currentMainContainer: "Login",
+    currentMainContainer: "Plan",
     selectedRecipeId: undefined,
     currentUser: undefined
   };
@@ -92,7 +93,7 @@ class App extends Component {
           />
         );
       case "Plan":
-        return <MealPlanListContainer recipes={this.state.recipes} />;
+        return <MealPlanListContainer recipes={this.state.recipes} addNewPlan={this.addNewPlan} />;
       case "List":
         return <ShoppingListContainer />;
       case "Settings":
@@ -153,8 +154,9 @@ class App extends Component {
     }
   };
 
-  addNewPlan = (event) => {
-    console.log("add Plan:", )
+  addNewPlan = (planObject) => {
+    API.CreatePlans(planObject)
+    .then(returnedObject => console.log("CreatePlans return", returnedObject))
   }
 
   render() {
