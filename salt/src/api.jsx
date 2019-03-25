@@ -36,11 +36,22 @@ const getFunction = url => {
   return fetch(url).then(resp => resp.json());
 };
 
+// ============================================= post ====================================================
+
+const postRecipe = options => {
+  return postFunction(recipeUrl, options);
+};
+
+const postFunction = (url, options) => {
+  return fetch(url, options).then(resp => resp.json());
+};
+
 export default {
   getRecipes,
   getIngredients,
   getUsers,
   getPlans,
   getRecipePlans,
-  getRecipeQtyIngredients
+  getRecipeQtyIngredients,
+  postRecipe
 };

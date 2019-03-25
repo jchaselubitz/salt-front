@@ -27,12 +27,11 @@ class NewRecipeForm extends Component {
       )
     ) {
       let ingredients = [...this.state.ingredients];
-      ingredients[event.target.dataset.id][
-        event.target.name
-      ] = event.target.value.toUpperCase();
+      ingredients[event.target.dataset.id][event.target.name] =
+        event.target.value;
       this.setState({ ingredients });
     } else {
-      this.setState({ [event.target.name]: event.target.value.toUpperCase() });
+      this.setState({ [event.target.name]: event.target.value });
     }
   };
 
@@ -46,22 +45,18 @@ class NewRecipeForm extends Component {
     });
   };
 
-  //   handleIngredientChange = (event, index) => {
-  //     let ingredients = [...this.state.ingredients];
-  //     ingredients[index] = event.target.value;
-  //     // this.state.ingredients[index] = event.target.value;
-
-  //     this.setState({
-  //       ingredients: ingredients
-  //     });
-  //   };
-
   removeIngredient = index => {
     this.state.ingredients.splice(index, 1);
 
     this.setState({
       ingredients: this.state.ingredients
     });
+  };
+
+  handleFormSubmit = event => {
+    event.preventDefault();
+    let newRecipe = this.state;
+    this.props.addNewRecipe(newRecipe);
   };
 
   render() {

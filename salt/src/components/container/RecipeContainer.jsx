@@ -19,7 +19,10 @@ class RecipeContainer extends Component {
         {this.props.recipe ? (
           <RecipeDetails recipe={this.props.recipe} />
         ) : (
-          <NewRecipeForm ingredients={this.props.ingredients} />
+          <NewRecipeForm
+            addNewRecipe={this.props.addNewRecipe}
+            ingredients={this.props.ingredients}
+          />
         )}
         {/*  rendered conditionaly {<RecipeDetails /> 
                 <NewRecipeForm /> } */}

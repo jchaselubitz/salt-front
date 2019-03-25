@@ -40,6 +40,7 @@ class App extends Component {
       case "Recipe":
         return (
           <RecipeContainer
+            addNewRecipe={this.addNewRecipe}
             ingredients={this.state.ingredients}
             recipe={this.findSelectedRecipe()}
             recipeBackButton={this.recipeBackButton}
@@ -104,6 +105,20 @@ class App extends Component {
         selectedRecipeId: undefined
       });
     }
+  };
+
+  addNewRecipe = recipe => {
+    const options = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(recipe)
+    };
+
+    API.postRecipe(options).then(recipe => console.log(recipe));
+
+    // .then(recipe =>
+    //   this.setState({ recipes: [...this.state.recipes, recipe] })
+    // );
   };
 
   render() {
