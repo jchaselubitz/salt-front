@@ -4,7 +4,7 @@ import RecipeDetails from "../presentation/RecipeDetails";
 import NewRecipeForm from "../presentation/NewRecipeForm";
 
 //BREADCRUMBS
-// app > library
+// app
 
 class RecipeContainer extends Component {
   state = {};

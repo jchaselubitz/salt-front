@@ -22,7 +22,7 @@ class MainNavContainer extends Component {
           <button onClick={() => this.SetPage("Home")}>Home</button>
           <button onClick={() => this.SetPage("Library")}>Library</button>
           <button onClick={() => this.SetPage("Recipe")}>Recipe</button>
-          <button onClick={() => this.SetPage("Plan")}>Plan</button>
+          <button onClick={() => this.SetPage("Plans")}>Plans</button>
           {this.logInOut()}
           <button onClick={() => this.SetPage("List")}>Shopping List</button>
           {/* <button onClick={() => this.SetPage("Settings")}>Settings</button> */}
