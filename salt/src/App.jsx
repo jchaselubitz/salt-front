@@ -16,7 +16,7 @@ class App extends Component {
     recipes: [],
     ingredients: [],
     plans: [],
-    currentMainContainer: "Login",
+    currentMainContainer: "Home",
     selectedRecipeId: undefined,
     currentUser: undefined
   };
@@ -52,6 +52,7 @@ class App extends Component {
       localStorage.setItem("token", token);
       this.setState({ currentUser: userObject.user });
     };
+    // window.location.reload()
   };
 
   setUser = userObject => {
@@ -60,7 +61,20 @@ class App extends Component {
 
   logout = () => {
     localStorage.removeItem("token");
-    this.setState({ currentUser: undefined });
+    this.setState({
+      // recipes: [],
+      // ingredients: [],
+      // plans: [],
+      // currentMainContainer: "Login",
+      // selectedRecipeId: undefined,
+      currentUser: undefined
+    });
+  };
+
+  showLoginForm = () => {
+    this.setState({
+      currentMainContainer: "Login"
+    });
   };
 
   //============================= DRAW APPLICATION ==============================================
@@ -158,7 +172,6 @@ class App extends Component {
 
   addNewPlan = planObject => {
     planObject.user_id = this.state.currentUser.id;
-    // console.log("addNewPlan in APP.jsx", planObject);
     API.createPlans(planObject).then(plan =>
       console.log("CreatePlans return", plan)
     );
@@ -193,7 +206,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <MainNavContainer handleClick={this.NavController} />
+        <MainNavContainer
+          handleClick={this.NavController}
+          currentUserStatus={!!this.state.currentUser}
+          login={this.showLoginForm}
+          logout={this.logout}
+        />
         {this.displayMainCont()}
       </div>
     );
