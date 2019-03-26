@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import RecipeCard from "./RecipeCard";
 import RecipeBlockListComponent from './RecipeBlockListComponent';
 
 //BREADCRUMBS

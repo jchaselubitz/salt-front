@@ -5,7 +5,7 @@ class ShoppingListContainer extends Component {
   state = {
     currentPlanId: undefined,
     plan: undefined,
-    ingredientList: [],
+    ingredientList: undefined,
     have: []
 
     // shoppingList: [{name: '', qty: '', unit: ''}]
@@ -15,10 +15,8 @@ class ShoppingListContainer extends Component {
     this.setState(
       {
         currentPlanId: parseInt(event.target.value)
-      }
-      //   () => {
-      //     this.findCurrentPlan();
-      //   }
+      },
+        () => {this.findCurrentPlan()}
     );
   };
 
@@ -41,18 +39,20 @@ class ShoppingListContainer extends Component {
   };
 
   generateIngredientList = recipes => {
-    // console.log("generate ingredient list ", recipes);
+    console.log("generate ingredient list ", recipes);
+    let newArray = []
     recipes.map(recipe =>
       recipe.ingredients.map(ingredient =>
-        this.setState({
-          ingredientList: [...this.state.ingredientList, ingredient]
-        })
+        newArray = [...newArray, ingredient]
       )
-    );
+    )
+    this.setState({
+      ingredientList: newArray
+    })
   };
 
   renderIngredientList = () => {
-    this.state.ingredientList.map(ingredient => (
+    return this.state.ingredientList.map(ingredient => (
       <RowListComponent ingredient={ingredient} />
     ));
   };
@@ -70,7 +70,7 @@ class ShoppingListContainer extends Component {
             <option value={plan.id}>{plan.start_date}</option>
           ))}
         </select>
-        {this.state.ingredientList.length > 0 && this.renderIngredientList}
+        {this.state.ingredientList && this.renderIngredientList()}
       </div>
     );
   }
