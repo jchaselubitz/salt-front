@@ -28,7 +28,7 @@ class App extends Component {
     API.getProfile()
       .then(userObject => {
         if (userObject.error) {
-          this.logout();
+          // this.logout();
         } else {
           this.setUser(userObject);
           // this.props.history.push("/home");
@@ -51,7 +51,6 @@ class App extends Component {
       localStorage.setItem("token", token);
       this.setState({ currentUser: userObject.user });
     };
-    // window.location.reload()
   };
 
   setUser = userObject => {
@@ -60,14 +59,15 @@ class App extends Component {
 
   logout = () => {
     localStorage.removeItem("token");
-    this.setState({
-      // recipes: [],
-      // ingredients: [],
-      // plans: [],
-      // currentMainContainer: "Login",
-      // selectedRecipeId: undefined,
+    this.setState({ 
+      recipes: [],
+      ingredients: [],
+      plans: [],
+      currentMainContainer: "Login",
+      selectedRecipeId: undefined,
       currentUser: undefined
     });
+    window.location.reload()
   };
 
   showLoginForm = () => {
