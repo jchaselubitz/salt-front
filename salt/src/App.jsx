@@ -128,8 +128,7 @@ class App extends Component {
     this.changeMainContState(label);
   };
 
-    //============================= APP LOGIC ==============================================
-
+  //============================= APP LOGIC ==============================================
 
   selectedRecipe = recipeId => {
     this.setState({
@@ -178,13 +177,25 @@ class App extends Component {
   };
 
   addNewRecipe = recipe => {
+    recipe.user_id = this.state.currentUser.id;
+
     const options = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(recipe)
     };
 
-    API.postRecipe(options).then(recipe => console.log(recipe));
+    API.postRecipe(options).then(recipe => {
+      recipe.ingredients.map(ing =>
+        !this.state.ingredients.includes(ing.name)
+          ? this.setState({ ingredients: [...this.state.ingredients, ing] })
+          : null
+      );
+      this.setState({
+        recipes: [...this.state.recipes, recipe],
+        selectedRecipeId: recipe.id
+      });
+    });
 
     // .then(recipe =>
     //   this.setState({ recipes: [...this.state.recipes, recipe] })
