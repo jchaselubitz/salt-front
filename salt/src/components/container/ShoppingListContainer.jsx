@@ -5,8 +5,9 @@ class ShoppingListContainer extends Component {
   state = {
     currentPlanId: undefined,
     plan: undefined,
-    shoppingList: [],
+    ingredientList: [],
     have: []
+
     // shoppingList: [{name: '', qty: '', unit: ''}]
   };
 
@@ -14,21 +15,20 @@ class ShoppingListContainer extends Component {
     this.setState(
       {
         currentPlanId: parseInt(event.target.value)
-      },
-      () => {
-        this.findCurrentPlan();
       }
+      //   () => {
+      //     this.findCurrentPlan();
+      //   }
     );
   };
 
   findCurrentPlan = () => {
     if (this.state.currentPlanId === undefined) return;
-    // console.log("FIND PLAN TOP");
 
     const currentPlan = this.props.plans.find(
       plan => plan.id === this.state.currentPlanId
     );
-    console.log("PLAN:", currentPlan);
+    console.log("FIND PLAN TOP", currentPlan);
     this.generateRecipeList(currentPlan);
   };
 
@@ -36,16 +36,25 @@ class ShoppingListContainer extends Component {
     let planRecipes = plan.recipes.map(recipe => {
       return this.props.recipes.find(r => r.id === recipe.id);
     });
+    // console.log("generate recipe list ", planRecipes);
     this.generateIngredientList(planRecipes);
   };
 
   generateIngredientList = recipes => {
+    // console.log("generate ingredient list ", recipes);
     recipes.map(recipe =>
       recipe.ingredients.map(ingredient =>
-        // <RowListComponent ingredient={ingredient} />
-        console.log(ingredient.name)
+        this.setState({
+          ingredientList: [...this.state.ingredientList, ingredient]
+        })
       )
     );
+  };
+
+  renderIngredientList = () => {
+    this.state.ingredientList.map(ingredient => (
+      <RowListComponent ingredient={ingredient} />
+    ));
   };
 
   render() {
@@ -61,7 +70,7 @@ class ShoppingListContainer extends Component {
             <option value={plan.id}>{plan.start_date}</option>
           ))}
         </select>
-        {/* {this.generateIngredientList} */}
+        {this.state.ingredientList.length > 0 && this.renderIngredientList}
       </div>
     );
   }
