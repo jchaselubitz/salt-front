@@ -96,7 +96,7 @@ class App extends Component {
           />
         );
       case "List":
-        return <ShoppingListContainer />;
+        return <ShoppingListContainer plans={this.state.plans} />;
       case "Settings":
         return <SettingsContainer />;
       default:
@@ -158,9 +158,9 @@ class App extends Component {
 
   addNewPlan = planObject => {
     planObject.user_id = this.state.currentUser.id;
-    console.log("addNewPlan in APP.jsx", planObject);
-    API.createPlans(planObject).then(returnedObject =>
-      console.log("CreatePlans return", returnedObject)
+    // console.log("addNewPlan in APP.jsx", planObject);
+    API.createPlans(planObject).then(plan =>
+      console.log("CreatePlans return", plan)
     );
   };
 
