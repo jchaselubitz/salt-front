@@ -15,10 +15,10 @@ class ShoppingListContainer extends Component {
     this.setState(
       {
         currentPlanId: parseInt(event.target.value)
+      },
+      () => {
+        this.findCurrentPlan();
       }
-      //   () => {
-      //     this.findCurrentPlan();
-      //   }
     );
   };
 
