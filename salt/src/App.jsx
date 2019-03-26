@@ -52,6 +52,7 @@ class App extends Component {
       localStorage.setItem("token", token);
       this.setState({ currentUser: userObject.user });
     };
+    window.location.reload()
   };
 
   setUser = userObject => {
