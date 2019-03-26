@@ -4,10 +4,21 @@ class ShoppingListContainer extends Component {
   state = {
     currentPlan: undefined
   };
+
+  updateCurrentPlan = event => {
+    console.log(event.target.value);
+    // this.setState({
+    //     currentPlan: event.target.value
+    // })
+  };
+
   render() {
     return (
       <div>
-        <select name="plan">
+        <select onChange={this.updateCurrentPlan} name="plan">
+          <option value="" disabled selected>
+            select a meal plan
+          </option>
           {this.props.plans.map(plan => (
             <option value={plan.start_date}> {plan.start_date} </option>
           ))}

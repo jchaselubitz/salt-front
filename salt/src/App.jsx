@@ -24,7 +24,7 @@ class App extends Component {
   componentDidMount() {
     API.getRecipes().then(recipes => this.setState({ recipes }));
     API.getIngredients().then(ingredients => this.setState({ ingredients }));
-    API.getPlans().then(plans => this.setState({ MealPlanListContainer }));
+    API.getPlans().then(plans => this.setState({ plans }));
     API.getProfile()
       // .then (resp => console.log("getProfileResp:",resp))
       .then(userObject => {
@@ -173,7 +173,9 @@ class App extends Component {
   addNewPlan = planObject => {
     planObject.user_id = this.state.currentUser.id;
     API.createPlans(planObject).then(plan =>
-      console.log("CreatePlans return", plan)
+      this.setState({
+        plans: [...this.state.plans, plan]
+      })
     );
   };
 
