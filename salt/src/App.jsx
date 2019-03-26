@@ -128,6 +128,8 @@ class App extends Component {
           <ShoppingListContainer
             plans={this.state.plans}
             recipes={this.state.recipes}
+            updateIngredient={this.updateIngredient}
+            ingredientObjects={this.state.ingredients}
           />
         );
       case "Settings":
@@ -253,6 +255,19 @@ class App extends Component {
     //   this.setState({ recipes: [...this.state.recipes, recipe] })
     // );
   };
+
+  //Needs to toggle in State AND send change to DB
+  updateIngredient = (ingredient) => {
+    console.log("arrived")
+    let newArray = this.state.ingredients.filter(ing => ing.id !== ingredient.id)
+    newArray = [...newArray, ingredient]
+    this.setState({ 
+      ingredients: newArray
+    })
+    API.updateIngredient(ingredient)
+    .then(resp => console.log(resp))
+    
+  }
 
   render() {
     return (

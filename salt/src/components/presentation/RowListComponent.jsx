@@ -1,7 +1,11 @@
 import React, { Component } from "react";
+import IngredientCard from "./IngredientCard";
 
 const RowListComponent = (props) => {
-  return <h1> {props.ingredient.name} </h1>;
+  return (
+      <IngredientCard ingredientId={props.ingredientId}  ingredientObjects={props.ingredientObjects} updateIngredient={props.updateIngredient}/>
+  )
+  
 };
 
 export default RowListComponent;

@@ -8,8 +8,8 @@ class ShoppingListContainer extends Component {
     ingredientList: undefined,
     have: []
 
-    // shoppingList: [{name: '', qty: '', unit: ''}]
   };
+  
 
   updateCurrentPlan = event => {
     this.setState(
@@ -26,7 +26,6 @@ class ShoppingListContainer extends Component {
     const currentPlan = this.props.plans.find(
       plan => plan.id === this.state.currentPlanId
     );
-    console.log("FIND PLAN TOP", currentPlan);
     this.generateRecipeList(currentPlan);
   };
 
@@ -39,11 +38,10 @@ class ShoppingListContainer extends Component {
   };
 
   generateIngredientList = recipes => {
-    console.log("generate ingredient list ", recipes);
     let newArray = []
     recipes.map(recipe =>
       recipe.ingredients.map(ingredient =>
-        newArray = [...newArray, ingredient]
+        newArray = [...newArray, ingredient.id]
       )
     )
     this.setState({
@@ -53,7 +51,7 @@ class ShoppingListContainer extends Component {
 
   renderIngredientList = () => {
     return this.state.ingredientList.map(ingredient => (
-      <RowListComponent ingredient={ingredient} />
+      <RowListComponent ingredientId={ingredient} ingredientObjects={this.props.ingredientObjects} updateIngredient={this.props.updateIngredient}/>
     ));
   };
 

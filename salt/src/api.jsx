@@ -76,7 +76,7 @@ const getFunction = url => {
 //============================= POST FUNCTIONS ==============================================
 
 const createIngredients = () => {
-  return postFunction(ingredientUrl);
+  return postAndPostFunction(ingredientUrl);
 };
 
 const createPlans = planObject => {
@@ -93,29 +93,51 @@ const createPlans = planObject => {
       }
     })
   };
-  return postFunction(planUrl, options);
+  return postAndPostFunction(planUrl, options);
 };
 
 const createUsers = () => {
-  return postFunction(usersUrl);
+  return postAndPostFunction(usersUrl);
 };
 
 const createRecipePlans = () => {
-  return postFunction(recipePlanUrl);
+  return postAndPostFunction(recipePlanUrl);
 };
 
 const createRecipeQtyIngredients = () => {
-  return postFunction(recipeQtyIngredientsUrl);
+  return postAndPostFunction(recipeQtyIngredientsUrl);
 };
 
 const postRecipe = options => {
-  return postFunction(recipeUrl, options);
+  return postAndPostFunction(recipeUrl, options);
 };
 
-const postFunction = (url, options) => {
+//============================= PATCH FUNCTIONS ==============================================
+
+const updateIngredient = ingredient => {
+  const options = {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" ,
+    Authorization: localStorage.getItem("token")},
+    body: JSON.stringify({
+      ingredient
+    })
+  };
+  return postAndPostFunction(`${ingredientUrl}/${ingredient.id}`, options);
+};
+
+//============================= PRIMARY PATCH AND POST FUNCTION ==============================================
+
+const postAndPostFunction = (url, options) => {
   return fetch(url, options)
   .then(resp => resp.json());
 };
+
+
+
+
+
+
 
 export default {
   getProfile,
@@ -131,5 +153,6 @@ export default {
   createUsers,
   createRecipePlans,
   createRecipeQtyIngredients,
-  postRecipe
+  postRecipe,
+  updateIngredient
 };
