@@ -32,7 +32,7 @@ class App extends Component {
           this.logout();
         } else {
           this.setUser(userObject);
-          this.props.history.push("/home");
+          // this.props.history.push("/home");
         }
       });
   }
@@ -165,15 +165,25 @@ class App extends Component {
   };
 
   addNewRecipe = recipe => {
-    recipe.user = this.state.currentUser;
-    console.log(recipe);
+    recipe.user_id = this.state.currentUser.id;
+
     const options = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(recipe)
     };
 
-    API.postRecipe(options).then(recipe => console.log(recipe));
+    API.postRecipe(options).then(recipe => {
+      recipe.ingredients.map(ing =>
+        !this.state.ingredients.includes(ing.name)
+          ? this.setState({ ingredients: [...this.state.ingredients, ing] })
+          : null
+      );
+      this.setState({
+        recipes: [...this.state.recipes, recipe],
+        selectedRecipeId: recipe.id
+      });
+    });
 
     // .then(recipe =>
     //   this.setState({ recipes: [...this.state.recipes, recipe] })
