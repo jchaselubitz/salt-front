@@ -11,6 +11,7 @@ import SettingsContainer from "./components/container/SettingsContainer";
 import Home from "./components/container/Home";
 import Login from "./components/container/Login";
 import API from "./api";
+import PlanRecipeExtractor from './components/PlanRecipeExtractor'
 
 class App extends Component {
   state = {
@@ -22,6 +23,8 @@ class App extends Component {
     selectedRecipeId: undefined,
     selectedPlanId: undefined
   };
+
+ 
 
   componentDidMount() {
     API.getRecipes().then(recipes => this.setState({ recipes }));
