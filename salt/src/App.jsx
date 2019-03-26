@@ -5,6 +5,7 @@ import MainNavContainer from "./components/container/MainNavContainer";
 import LibraryContainer from "./components/container/LibraryContainer";
 import MealPlanListContainer from "./components/container/MealPlanListContainer";
 import RecipeContainer from "./components/container/RecipeContainer";
+import PlanContainer from "./components/container/PlanContainer";
 import ShoppingListContainer from "./components/container/ShoppingListContainer";
 import SettingsContainer from "./components/container/SettingsContainer";
 import Home from "./components/container/Home";
@@ -13,12 +14,13 @@ import API from "./api";
 
 class App extends Component {
   state = {
+    currentUser: undefined,
     recipes: [],
     ingredients: [],
     plans: [],
     currentMainContainer: "Home",
     selectedRecipeId: undefined,
-    currentUser: undefined
+    selectedPlanId: undefined
   };
 
   componentDidMount() {
@@ -63,7 +65,7 @@ class App extends Component {
       recipes: [],
       ingredients: [],
       plans: [],
-      currentMainContainer: "Login",
+      currentMainContainer: "Home",
       selectedRecipeId: undefined,
       currentUser: undefined
     });
@@ -101,12 +103,21 @@ class App extends Component {
             recipeBackButton={this.recipeBackButton}
           />
         );
-      case "Plan":
+      case "Plans":
         return (
           <MealPlanListContainer
-            recipes={this.state.recipes}
             mealPlans={this.state.plans}
             addNewPlan={this.addNewPlan}
+            ShowPlanDetails={this.ShowPlanDetails}
+
+          />
+        );
+      case "Plan":
+        return (
+          <PlanContainer
+            plans={this.state.plans}
+            plan={this.findSelectedPlan()}
+            recipes={this.state.recipes}
           />
         );
       case "List":
@@ -162,12 +173,38 @@ class App extends Component {
     }
   };
 
+  planBackButton = () => {
+    if (this.state.currentMainContainer === "Plan") {
+      this.changeMainContState("Plans");
+    }
+  };
+
   deselectRecipeId = containerLabel => {
     if (containerLabel === "Library") {
       this.setState({
         selectedRecipeId: undefined
       });
     }
+  };
+
+  ShowPlanDetails = (planId, label) => {
+    this.selectedPlan(planId);
+    this.changeMainContState(label);
+  };
+
+
+  selectedPlan = planId => {
+    this.setState({
+      selectedPlanId: planId
+    });
+  };
+
+  findSelectedPlan = () => {
+    if (this.state.selectedPlanId === undefined) return;
+    let selectedPlanArray = this.state.plans.find(
+      plan => plan.id === this.state.selectedPlanId
+    );
+    return selectedPlanArray
   };
 
   addNewPlan = planObject => {

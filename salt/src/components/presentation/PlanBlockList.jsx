@@ -4,9 +4,6 @@ import PlanCard from "./PlanCard";
 class PlanBlockList extends Component {
   state = {};
 
-  handleClick = () => {
-    console.log("plan click")
-  }
 
   render() {
     return (
@@ -14,7 +11,7 @@ class PlanBlockList extends Component {
        {this.props.mealPlans.map(mealPlan => (
           <PlanCard
           mealPlan={mealPlan}
-            handleClick ={this.handleClick}
+            handleClick={this.props.ShowPlanDetails}
           />
        ))}
       </div>

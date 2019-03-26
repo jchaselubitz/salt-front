@@ -4,9 +4,6 @@ import PlanBlockList from "../presentation/PlanBlockList";
 import CreatePlanForm from "../presentation/CreatePlanForm.jsx"
 
 
-//NOTES
-//plans needed before we can uncomment <PlanBlockList />
-
 
 class MealPlanListContainer extends Component {
   state = {
@@ -27,12 +24,11 @@ class MealPlanListContainer extends Component {
     }
   }
 
-
   render() {
     return (
       <div>
         {/* <ContainerNavComponent />; */}
-        <PlanBlockList mealPlans={this.props.mealPlans}/>
+        <PlanBlockList mealPlans={this.props.mealPlans} ShowPlanDetails={this.props.ShowPlanDetails} />
         <button onClick={this.createFormShowHide}>Create New</button>
         {this.newPlan()}
       </div>
