@@ -52,7 +52,7 @@ class App extends Component {
       localStorage.setItem("token", token);
       this.setState({ currentUser: userObject.user });
     };
-    window.location.reload()
+    // window.location.reload()
   };
 
   setUser = userObject => {
@@ -62,11 +62,11 @@ class App extends Component {
   logout = () => {
     localStorage.removeItem("token");
     this.setState({ 
-      recipes: [],
-      ingredients: [],
-      plans: [],
-      currentMainContainer: "Login",
-      selectedRecipeId: undefined,
+      // recipes: [],
+      // ingredients: [],
+      // plans: [],
+      // currentMainContainer: "Login",
+      // selectedRecipeId: undefined,
       currentUser: undefined});
   };
 
