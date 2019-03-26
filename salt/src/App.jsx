@@ -26,7 +26,6 @@ class App extends Component {
     API.getIngredients().then(ingredients => this.setState({ ingredients }));
     API.getPlans().then(plans => this.setState({ MealPlanListContainer }));
     API.getProfile()
-      // .then (resp => console.log("getProfileResp:",resp))
       .then(userObject => {
         if (userObject.error) {
           this.logout();
