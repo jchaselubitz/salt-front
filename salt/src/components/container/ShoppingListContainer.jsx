@@ -16,7 +16,9 @@ class ShoppingListContainer extends Component {
       {
         currentPlanId: parseInt(event.target.value)
       },
-        () => {this.findCurrentPlan()}
+      () => {
+        this.findCurrentPlan();
+      }
     );
   };
 
@@ -43,10 +45,10 @@ class ShoppingListContainer extends Component {
       recipe.ingredients.map(ingredient =>
         newArray = [...newArray, ingredient.id]
       )
-    )
+    );
     this.setState({
       ingredientList: newArray
-    })
+    });
   };
 
   renderIngredientList = () => {
