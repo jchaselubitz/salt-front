@@ -25,15 +25,14 @@ class App extends Component {
     API.getRecipes().then(recipes => this.setState({ recipes }));
     API.getIngredients().then(ingredients => this.setState({ ingredients }));
     API.getPlans().then(plans => this.setState({ plans }));
-    API.getProfile()
-      .then(userObject => {
-        if (userObject.error) {
-          // this.logout();
-        } else {
-          this.setUser(userObject);
-          // this.props.history.push("/home");
-        }
-      });
+    API.getProfile().then(userObject => {
+      if (userObject.error) {
+        // this.logout();
+      } else {
+        this.setUser(userObject);
+        // this.props.history.push("/home");
+      }
+    });
   }
 
   //============================= LOGIN/AUTH ==============================================
@@ -59,7 +58,7 @@ class App extends Component {
 
   logout = () => {
     localStorage.removeItem("token");
-    this.setState({ 
+    this.setState({
       recipes: [],
       ingredients: [],
       plans: [],
@@ -67,7 +66,7 @@ class App extends Component {
       selectedRecipeId: undefined,
       currentUser: undefined
     });
-    window.location.reload()
+    window.location.reload();
   };
 
   showLoginForm = () => {
@@ -109,7 +108,12 @@ class App extends Component {
           />
         );
       case "List":
-        return <ShoppingListContainer plans={this.state.plans} />;
+        return (
+          <ShoppingListContainer
+            plans={this.state.plans}
+            recipes={this.state.recipes}
+          />
+        );
       case "Settings":
         return <SettingsContainer />;
       default:
