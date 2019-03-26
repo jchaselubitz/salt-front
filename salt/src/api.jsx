@@ -83,10 +83,10 @@ const createPlans = (planObject) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       calendar: {
-        user_id: planObject.id,
+        user_id: planObject.user_id,
         start_date: planObject.start_date,
         end_date: planObject.end_date,
-        index_calendars_on_user_id: planObject.recipeIds
+        recipes: planObject.recipeIds
       }
     })
   };
@@ -110,7 +110,8 @@ const postRecipe = options => {
 };
 
 const postFunction = (url, options) => {
-  return fetch(url, options).then(resp => resp.json());
+  return fetch(url, options)
+  .then(resp => resp.json());
 };
 
 export default {

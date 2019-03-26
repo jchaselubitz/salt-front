@@ -32,7 +32,7 @@ class App extends Component {
           this.logout();
         } else {
           this.setUser(userObject);
-          this.props.history.push("/home");
+          // this.props.history.push("/home");
         }
       });
   }
@@ -159,7 +159,6 @@ class App extends Component {
 
   addNewPlan = planObject => {
     planObject.user_id = this.state.currentUser.id
-    console.log("addNewPlan in APP.jsx", planObject)
     API.createPlans(planObject).then(returnedObject =>
       console.log("CreatePlans return", returnedObject)
     );
