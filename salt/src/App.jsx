@@ -106,6 +106,7 @@ class App extends Component {
       case "Plans":
         return (
           <MealPlanListContainer
+            recipes={this.state.recipes}
             mealPlans={this.state.plans}
             addNewPlan={this.addNewPlan}
             ShowPlanDetails={this.ShowPlanDetails}
@@ -191,6 +192,10 @@ class App extends Component {
     this.selectedPlan(planId);
     this.changeMainContState(label);
   };
+
+  // plans={this.state.plans}
+  // plan={this.findSelectedPlan()}
+  // recipes={this.state.recipes}
 
 
   selectedPlan = planId => {
