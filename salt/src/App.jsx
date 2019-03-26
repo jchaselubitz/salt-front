@@ -18,7 +18,7 @@ class App extends Component {
     plans: [],
     currentMainContainer: "Plan",
     selectedRecipeId: undefined,
-    currentUser: undefined
+    currentUser: "saphie@test.com"
   };
 
   componentDidMount() {
@@ -161,6 +161,8 @@ class App extends Component {
   };
 
   addNewRecipe = recipe => {
+    recipe.user = this.state.currentUser;
+    console.log(recipe);
     const options = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
