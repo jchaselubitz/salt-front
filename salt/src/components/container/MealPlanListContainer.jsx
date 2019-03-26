@@ -32,7 +32,7 @@ class MealPlanListContainer extends Component {
     return (
       <div>
         {/* <ContainerNavComponent />; */}
-        {/* <PlanBlockList /> */}
+        <PlanBlockList mealPlans={this.props.mealPlans}/>
         <button onClick={this.createFormShowHide}>Create New</button>
         {this.newPlan()}
       </div>

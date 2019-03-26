@@ -3,11 +3,23 @@ import PlanCard from "./PlanCard";
 
 class PlanBlockList extends Component {
   state = {};
-  render() {
-    return {
-      /*  map over and create <PlanCard />*/
-    };
+
+  handleClick = () => {
+    console.log("plan click")
   }
+
+  render() {
+    return (
+      <div>
+       {this.props.mealPlans.map(mealPlan => (
+          <PlanCard
+          mealPlan={mealPlan}
+            handleClick ={this.handleClick}
+          />
+       ))}
+      </div>
+  )
+}
 }
 
 export default PlanBlockList;

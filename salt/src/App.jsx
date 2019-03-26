@@ -105,6 +105,7 @@ class App extends Component {
         return (
           <MealPlanListContainer
             recipes={this.state.recipes}
+            mealPlans={this.state.plans}
             addNewPlan={this.addNewPlan}
           />
         );
