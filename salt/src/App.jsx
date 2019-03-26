@@ -18,7 +18,7 @@ class App extends Component {
     plans: [],
     currentMainContainer: "Login",
     selectedRecipeId: undefined,
-    currentUser: "saphie@test.com"
+    currentUser: undefined
   };
 
   componentDidMount() {
@@ -115,8 +115,7 @@ class App extends Component {
     this.changeMainContState(label);
   };
 
-    //============================= APP LOGIC ==============================================
-
+  //============================= APP LOGIC ==============================================
 
   selectedRecipe = recipeId => {
     this.setState({
@@ -158,8 +157,8 @@ class App extends Component {
   };
 
   addNewPlan = planObject => {
-    planObject.user_id = this.state.currentUser.id
-    console.log("addNewPlan in APP.jsx", planObject)
+    planObject.user_id = this.state.currentUser.id;
+    console.log("addNewPlan in APP.jsx", planObject);
     API.createPlans(planObject).then(returnedObject =>
       console.log("CreatePlans return", returnedObject)
     );
