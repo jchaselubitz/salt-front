@@ -77,15 +77,16 @@ const CreateIngredients = () => {
   return postFunction(ingredientUrl);
 };
 
-const CreatePlans = input => {
+const CreatePlans = (object, currentUser) => {
   const options = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       calendar: {
-        start_date: input.plan.start_date,
-        end_date: input.plan.end_date,
-        index_calendars_on_user_id: input.plan.recipeIds
+        user_id: currentUser.id,
+        start_date: object.plan.start_date,
+        end_date: object.plan.end_date,
+        index_calendars_on_user_id: object.plan.recipeIds
       }
     })
   };

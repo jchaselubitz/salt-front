@@ -16,7 +16,7 @@ class App extends Component {
     recipes: [],
     ingredients: [],
     plans: [],
-    currentMainContainer: "Plan",
+    currentMainContainer: "Login",
     selectedRecipeId: undefined,
     currentUser: undefined
   };
@@ -47,15 +47,15 @@ class App extends Component {
       }
     );
     const loginSetUser = userObject => {
-      let userEmail = userObject.user.email;
+      // let userEmail = userObject.user.email;
       let token = userObject.token;
       localStorage.setItem("token", token);
-      this.setState({ currentUser: userEmail });
+      this.setState({ currentUser: userObject.user });
     };
   };
 
   setUser = userObject => {
-    this.setState({ currentUser: userObject.user.email });
+    this.setState({ currentUser: userObject.user });
   };
 
   logout = () => {
@@ -155,7 +155,7 @@ class App extends Component {
   };
 
   addNewPlan = planObject => {
-    API.CreatePlans(planObject).then(returnedObject =>
+    API.CreatePlans(planObject, this.state.currentUser).then(returnedObject =>
       console.log("CreatePlans return", returnedObject)
     );
   };
