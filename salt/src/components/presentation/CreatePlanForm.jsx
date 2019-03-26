@@ -38,11 +38,9 @@ class CreatePlanForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault()
     this.props.addNewPlan({
-      plan: {
-        start_date: this.state.start_date,
-        end_date: this.state.end_date,
-        recipeIds: this.state.selectedRecipeIds
-      }
+      start_date: this.state.start_date,
+      end_date: this.state.end_date,
+      recipeIds: this.state.selectedRecipeIds
     })
   }
 

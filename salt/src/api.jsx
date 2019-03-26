@@ -73,35 +73,35 @@ const getFunction = url => {
 
 //============================= POST FUNCTIONS ==============================================
 
-const CreateIngredients = () => {
+const createIngredients = () => {
   return postFunction(ingredientUrl);
 };
 
-const CreatePlans = (object, currentUser) => {
+const createPlans = (planObject) => {
   const options = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       calendar: {
-        user_id: currentUser.id,
-        start_date: object.plan.start_date,
-        end_date: object.plan.end_date,
-        index_calendars_on_user_id: object.plan.recipeIds
+        user_id: planObject.id,
+        start_date: planObject.start_date,
+        end_date: planObject.end_date,
+        index_calendars_on_user_id: planObject.recipeIds
       }
     })
   };
   return postFunction(planUrl, options);
 };
 
-const CreateUsers = () => {
+const createUsers = () => {
   return postFunction(usersUrl);
 };
 
-const CreateRecipePlans = () => {
+const createRecipePlans = () => {
   return postFunction(recipePlanUrl);
 };
 
-const CreateRecipeQtyIngredients = () => {
+const createRecipeQtyIngredients = () => {
   return postFunction(recipeQtyIngredientsUrl);
 };
 
@@ -122,10 +122,10 @@ export default {
   getRecipePlans,
   getRecipeQtyIngredients,
   loginPost,
-  CreateIngredients,
-  CreatePlans,
-  CreateUsers,
-  CreateRecipePlans,
-  CreateRecipeQtyIngredients,
+  createIngredients,
+  createPlans,
+  createUsers,
+  createRecipePlans,
+  createRecipeQtyIngredients,
   postRecipe
 };

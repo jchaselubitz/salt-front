@@ -63,7 +63,7 @@ class App extends Component {
     this.setState({ currentUser: undefined });
   };
 
-  //============================= DRAW APPLICATIONS ==============================================
+  //============================= DRAW APPLICATION ==============================================
 
   displayMainCont = () => {
     switch (this.state.currentMainContainer) {
@@ -115,6 +115,9 @@ class App extends Component {
     this.changeMainContState(label);
   };
 
+    //============================= APP LOGIC ==============================================
+
+
   selectedRecipe = recipeId => {
     this.setState({
       selectedRecipeId: recipeId
@@ -155,7 +158,9 @@ class App extends Component {
   };
 
   addNewPlan = planObject => {
-    API.CreatePlans(planObject, this.state.currentUser).then(returnedObject =>
+    planObject.user_id = this.state.currentUser.id
+    console.log("addNewPlan in APP.jsx", planObject)
+    API.createPlans(planObject).then(returnedObject =>
       console.log("CreatePlans return", returnedObject)
     );
   };
