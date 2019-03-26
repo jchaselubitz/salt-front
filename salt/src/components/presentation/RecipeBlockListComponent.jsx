@@ -19,8 +19,6 @@ class RecipeBlockListComponent extends Component {
           <RecipeCard
             recipe={recipe}
             handleClick ={this.props.handleClick}
-            // selectedRecipe={this.props.selectedRecipe}
-            // handleContChange={this.props.handleContChange}
           />
         ))}
       </div>
