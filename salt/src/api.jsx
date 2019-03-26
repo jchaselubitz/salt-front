@@ -32,13 +32,7 @@ const loginCall = (url, email, password) => {
 };
 
 const getProfile = () => {
-  const options = {
-    method: "GET",
-    headers: {
-      Authorization: localStorage.getItem("token")
-    }
-  };
-  return fetch(profileUrl, options).then(resp => resp.json());
+  return getFunction(profileUrl);
 };
 
 //============================= GET FUNCTIONS ==============================================
@@ -68,7 +62,15 @@ const getRecipeQtyIngredients = () => {
 };
 
 const getFunction = url => {
-  return fetch(url).then(resp => resp.json());
+  const options = {
+    method: "GET",
+    headers: {
+      Authorization: localStorage.getItem("token")
+    }
+  };
+  return fetch(url, options)
+  .then(resp => resp.json());
+
 };
 
 //============================= POST FUNCTIONS ==============================================
@@ -80,7 +82,8 @@ const createIngredients = () => {
 const createPlans = (planObject) => {
   const options = {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json" ,
+    Authorization: localStorage.getItem("token")},
     body: JSON.stringify({
       calendar: {
         user_id: planObject.user_id,
