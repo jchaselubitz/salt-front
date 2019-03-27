@@ -5,9 +5,7 @@ class ShoppingListContainer extends Component {
   state = {
     currentPlanId: undefined,
     plan: undefined,
-    ingredientList: undefined,
-    have: []
-
+    ingredientList: undefined
   };
   
 
@@ -35,7 +33,6 @@ class ShoppingListContainer extends Component {
     let planRecipes = plan.recipes.map(recipe => {
       return this.props.recipes.find(r => r.id === recipe.id);
     });
-    // console.log("generate recipe list ", planRecipes);
     this.generateIngredientList(planRecipes);
   };
 
