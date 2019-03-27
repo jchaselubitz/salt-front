@@ -25,7 +25,7 @@ class ShoppingListContainer extends Component {
   findCurrentPlan = () => {
     if (this.state.currentPlanId === undefined) return;
 
-    const currentPlan = this.props.plans.find(
+    const currentPlan = this.props.mealPlans.find(
       plan => plan.id === this.state.currentPlanId
     );
     this.generateRecipeList(currentPlan);
@@ -51,14 +51,18 @@ class ShoppingListContainer extends Component {
     });
   };
 
-  renderIngredientList = () => {
-    return this.state.ingredientList.map(ingredient => (
-      <RowListComponent ingredientId={ingredient} ingredientObjects={this.props.ingredientObjects} updateIngredient={this.props.updateIngredient}/>
-    ));
+  findIngredient = (ingredientId) => {
+      return this.props.ingredients.find(ingredient => ingredient.id === ingredientId)
   };
 
+  renderIngredientList = () => {
+    return this.state.ingredientList.map(ingredientId => (
+      <RowListComponent ingredient={this.findIngredient(ingredientId)}  updateIngredient={this.props.updateIngredient}/>
+    ))
+  }
+
   render() {
-    const plans = this.props.plans.filter(plan => plan.recipes.length > 0);
+    const plans = this.props.mealPlans.filter(plan => plan.recipes.length > 0);
 
     return (
       <div>

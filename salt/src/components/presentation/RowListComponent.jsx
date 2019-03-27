@@ -3,7 +3,7 @@ import IngredientCard from "./IngredientCard";
 
 const RowListComponent = (props) => {
   return (
-      <IngredientCard ingredientId={props.ingredientId}  ingredientObjects={props.ingredientObjects} updateIngredient={props.updateIngredient}/>
+      <IngredientCard ingredientId={props.ingredientId}  ingredient={props.ingredient} updateIngredient={props.updateIngredient}/>
   )
   
 };

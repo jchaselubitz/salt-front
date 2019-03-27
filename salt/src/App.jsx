@@ -32,7 +32,7 @@ class App extends Component {
     API.getPlans().then(plans => this.setState({ plans }));
     API.getProfile().then(userObject => {
       if (userObject.error) {
-        // this.logout();
+        this.logout();
       } else {
         this.setUser(userObject);
         // this.props.history.push("/home");
@@ -126,10 +126,10 @@ class App extends Component {
       case "List":
         return (
           <ShoppingListContainer
-            plans={this.state.plans}
+            mealPlans={this.state.plans}
             recipes={this.state.recipes}
             updateIngredient={this.updateIngredient}
-            ingredientObjects={this.state.ingredients}
+            ingredients={this.state.ingredients}
           />
         );
       case "Settings":

@@ -14,15 +14,12 @@ class IngredientCard extends Component {
     this.props.updateIngredient(ingredient)
   }
 
-  renderIngredient = (ingredientId) => {
-    return this.props.ingredientObjects.find(ingredient => ingredient.id === ingredientId)
-  }
 
   render() { 
     return ( 
-    <div className="ingredient-card" onClick={() => this.handleClick(this.renderIngredient(this.props.ingredientId))} >
-      <h3> {this.renderIngredient(this.props.ingredientId).name} </h3>
-      <p>{this.renderIngredient(this.props.ingredientId).have === true ? "true" : "false"}</p>
+    <div className="ingredient-card" onClick={() => this.handleClick(this.props.ingredient)} >
+      <h3> {this.props.ingredient.name} </h3>
+      <p>{this.props.ingredient.have === true ? "true" : "false"}</p>
     </div> );
   }
 }
