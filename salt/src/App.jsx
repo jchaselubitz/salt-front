@@ -9,7 +9,7 @@ import PlanContainer from "./components/container/PlanContainer";
 import ShoppingListContainer from "./components/container/ShoppingListContainer";
 import SettingsContainer from "./components/container/SettingsContainer";
 import Home from "./components/container/Home";
-import Login from "./components/container/Login";
+import Login from "./components/Login";
 import API from "./api";
 import PlanRecipeExtractor from './components/PlanRecipeExtractor'
 
@@ -24,41 +24,26 @@ class App extends Component {
     selectedPlanId: undefined
   };
 
- 
-
   componentDidMount() {
-    API.getRecipes().then(recipes => this.setState({ recipes }));
-    API.getIngredients().then(ingredients => this.setState({ ingredients }));
-    API.getPlans().then(plans => this.setState({ plans }));
-    API.getProfile().then(userObject => {
-      if (userObject.error) {
-        this.logout();
-      } else {
-        this.setUser(userObject);
-        // this.props.history.push("/home");
-      }
-    });
+    this.setUser()
   }
 
   //============================= LOGIN/AUTH ==============================================
 
-  login = event => {
-    event.preventDefault();
-    API.loginPost(event.target.email.value, event.target.password.value).then(
-      userObject => {
-        loginSetUser(userObject);
+  setUser = () => {
+    API.getProfile().then(userObject => {
+      if (userObject.error) {
+        this.logout();
+        this.showLoginForm() //ROUTE: Login
+      } else {
+        this.setState({ currentUser: userObject.user })
+        API.getRecipes().then(recipes => this.setState({ recipes }));
+        API.getIngredients().then(ingredients => this.setState({ ingredients }));
+        API.getPlans().then(plans => this.setState({ plans }));
+        // this.props.history.push("/home");
       }
-    );
-    const loginSetUser = userObject => {
-      // let userEmail = userObject.user.email;
-      let token = userObject.token;
-      localStorage.setItem("token", token);
-      this.setState({ currentUser: userObject.user });
-    };
-  };
-
-  setUser = userObject => {
-    this.setState({ currentUser: userObject.user });
+    });
+    ;
   };
 
   logout = () => {
@@ -87,7 +72,7 @@ class App extends Component {
       case "Home":
         return <Home />;
       case "Login":
-        return <Login login={this.login} />;
+        return <Login login={this.login} setUser={this.setUser}/>;
       case "Library":
         return (
           <LibraryContainer
