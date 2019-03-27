@@ -1,10 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
-// import { Route, Link, BrowserRouter as Router } from "react-router-dom";
+
 // import Login from "./components/Login";
 import "./index.css";
-import App from "./App.jsx";
+import App from "./App";
 import * as serviceWorker from "./serviceWorker";
+
+// const routing = (
+
+// );
 
 ReactDOM.render(<App />, document.getElementById("root"));
 

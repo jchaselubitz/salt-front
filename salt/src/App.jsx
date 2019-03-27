@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import {
   Route,
-  Link,
-  BrowserRouter,
+  NavLink,
+  BrowserRouter as Router,
   Switch,
-  Redirect as Router
+  Redirect
 } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
 import "./App.css";
 import MainNavContainer from "./components/container/MainNavContainer";
 import LibraryContainer from "./components/container/LibraryContainer";
@@ -48,22 +49,35 @@ class App extends Component {
     }
   };
 
-  routing = (
-    <Router>
-      <div>
-        <nav>
-          <button onClick={() => this.SetPage("Home")}>Home</button>
-          <button onClick={() => this.SetPage("Library")}>Library</button>
-          <button onClick={() => this.SetPage("Recipe")}>Recipe</button>
-          <button onClick={() => this.SetPage("Plans")}>Plans</button>
-          {this.logInOut()}
-          <button onClick={() => this.SetPage("List")}>Shopping List</button>
-        </nav>
-        <Route exact path="/" component={App} />
-        <Route path="/login" component={Login} />
-      </div>
-    </Router>
-  );
+  // routing = (
+  //   <Router>
+  //     <div>
+  //       <nav>
+  //         <button onClick={() => this.SetPage("Home")}>
+  //           <Link to={"/"} className="nav-link">
+  //             {" "}
+  //             Home{" "}
+  //           </Link>
+  //         </button>
+  //         <button>
+  //           <Link to={"/login"} className="nav-link">
+  //             {" "}
+  //             Login{" "}
+  //           </Link>
+  //         </button>
+  //         ;
+  //         {/* <button onClick={() => this.SetPage("Library")}>Library</button>
+  //         <button onClick={() => this.SetPage("Recipe")}>Recipe</button>
+  //         <button onClick={() => this.SetPage("Plans")}>Plans</button>
+  //         {this.logInOut()}
+  //         <button onClick={() => this.SetPage("List")}>Shopping List</button>
+  //        */}
+  //       </nav>
+  //       <Route exact path="/" component={App} />
+  //       <Route path="/login" component={Login} />
+  //     </div>
+  //   </Router>
+  // );
 
   //============================= LOGIN/AUTH ==============================================
 
@@ -79,9 +93,16 @@ class App extends Component {
           this.setState({ ingredients })
         );
         API.getPlans().then(plans => this.setState({ plans }));
+
         //this.props.history.push("/");
       }
     });
+  };
+
+  renderRedirect = () => {
+    if (this.state.currentUser) {
+      return <Redirect to="/" />;
+    }
   };
 
   logout = () => {
@@ -110,7 +131,7 @@ class App extends Component {
       case "Home":
         return <Home />;
       case "Login":
-        return <Login login={this.login} setUser={this.setUser} />;
+        return <Login setUser={this.setUser} />;
       case "Library":
         return (
           <LibraryContainer
@@ -291,14 +312,117 @@ class App extends Component {
 
   render() {
     return (
+      // <h1>Hello</h1>
       <div className="App">
-        <MainNavContainer
-          handleClick={this.NavController}
-          currentUserStatus={!!this.state.currentUser}
-          login={this.showLoginForm}
-          logout={this.logout}
-        />
-        {this.displayMainCont()}
+        <Router>
+          {/* <MainNavContainer
+            handleClick={this.NavController}
+            currentUserStatus={!!this.state.currentUser}
+            login={this.showLoginForm}
+            logout={this.logout}
+          /> */}
+          {/* {this.displayMainCont()} */}
+          {this.state.currentUser ? (
+            <NavLink to="/login" onClick={() => this.logout()}>
+              Logout
+            </NavLink>
+          ) : (
+            <NavLink to="/login"> Login </NavLink>
+          )}
+
+          {/* <NavLink to="/login"> Login </NavLink> */}
+          <NavLink to="/"> Home </NavLink>
+          <NavLink to="/library"> Library </NavLink>
+          {/* <NavLink to="/recipe"> Recipe </NavLink> */}
+          <NavLink to="/plans"> Meal Plans </NavLink>
+          {/* <NavLink to="/plan"> Plan </NavLink> */}
+          <NavLink to="/list"> shopping list </NavLink>
+          <NavLink to="/settings"> settings </NavLink>
+          <div>
+            <Route
+              exact
+              path="/"
+              render={() =>
+                !this.state.currentUser ? <Redirect to="/login" /> : <Home />
+              }
+            />
+
+            <Route
+              path="/library"
+              component={() => (
+                <LibraryContainer
+                  recipeAddButton={this.recipeAddButton}
+                  recipes={this.state.recipes}
+                  ShowCardDetails={this.ShowCardDetails}
+                />
+              )}
+            />
+
+            <Route
+              exact
+              path={`/recipe/:recipeId`}
+              component={() => (
+                <RecipeContainer
+                  addNewRecipe={this.addNewRecipe}
+                  ingredients={this.state.ingredients}
+                  recipe={this.findSelectedRecipe()}
+                  recipeBackButton={this.recipeBackButton}
+                />
+              )}
+            />
+
+            <Route
+              exact
+              path="/plans"
+              component={() => (
+                <MealPlanListContainer
+                  recipes={this.state.recipes}
+                  mealPlans={this.state.plans}
+                  addNewPlan={this.addNewPlan}
+                  ShowPlanDetails={this.ShowPlanDetails}
+                />
+              )}
+            />
+
+            <Route
+              exact
+              path={`/plan/:planId`}
+              component={() => (
+                <PlanContainer
+                  plans={this.state.plans}
+                  plan={this.findSelectedPlan()}
+                  recipes={this.state.recipes}
+                />
+              )}
+            />
+
+            <Route
+              exact
+              path="/list"
+              component={() => (
+                <ShoppingListContainer
+                  mealPlans={this.state.plans}
+                  recipes={this.state.recipes}
+                  updateIngredient={this.updateIngredient}
+                  ingredients={this.state.ingredients}
+                />
+              )}
+            />
+
+            <Route exact path="/settings" component={SettingsContainer} />
+
+            <Route
+              path="/login"
+              render={() =>
+                this.state.currentUser ? (
+                  <Redirect to="/" />
+                ) : (
+                  <Login setUser={this.setUser} />
+                )
+              }
+            />
+          </div>
+        </Router>
       </div>
     );
   }
