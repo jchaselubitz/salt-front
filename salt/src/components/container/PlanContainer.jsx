@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ContainerNavComponent from "../presentation/ContainerNavComponent";
 import PlanDetails from "../presentation/PlanDetails";
 import CreatePlanForm from "../presentation/CreatePlanForm";
+import { Button, Card, Image } from 'semantic-ui-react'
 
 // plan={this.state.recipes}
 // mealPlans={this.findSelectedPlan()}

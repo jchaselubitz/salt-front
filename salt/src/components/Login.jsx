@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button, Form } from 'semantic-ui-react';
 import API from "../api";
 
 class Login extends Component {
@@ -21,14 +22,21 @@ class Login extends Component {
 
   render() { 
     return ( 
-    <div>
+    <div className='account-form-container'>
       <h2>Log In</h2>
-      <form onSubmit={this.login}>
+      <Form onSubmit={this.login}>
+      <Form.Field>
+      <label>Email Address:</label>
        <input type="text" name="email"/>
+      </Form.Field>
+      <Form.Field>
+      <label>Password:</label>
        <input type="text" name="password"/>
-       <button value="submit">Log In</button>
-      </form>
-    </div> );
+      </Form.Field>
+       <Button value="submit">Log In</Button>
+      </Form>
+    </div> 
+    );
   }
 }
  

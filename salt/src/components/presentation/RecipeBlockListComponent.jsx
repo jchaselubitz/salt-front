@@ -14,7 +14,7 @@ class RecipeBlockListComponent extends Component {
 
   render() {
     return (
-      <div>
+      <div >
         {this.props.recipes.map(recipe => (
           <RecipeCard
             recipe={recipe}

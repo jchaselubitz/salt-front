@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
- 
+import {Card, Image } from 'semantic-ui-react'
 
 class IngredientCard extends Component {
   state = {  }
@@ -12,10 +12,14 @@ class IngredientCard extends Component {
 
   render() { 
     return ( 
-    <div className="ingredient-card" onClick={() => this.handleClick(this.props.ingredient)} >
-      <h3> {this.props.ingredient.name} </h3>
-      <p>{this.props.ingredient.have === true ? "true" : "false"}</p>
-    </div> );
+     
+      <Card fluid color={this.props.ingredient.have === false ? 'white' : 'blue'} onClick={() => this.handleClick(this.props.ingredient)} >
+      {/* <Image floated='right' size='mini' src={this.props.ingredient.image} /> */}
+         <Card.Header> {this.props.ingredient.name} </Card.Header>
+        <Card.Meta>{this.props.ingredient.have === true ? "Have it" : "Time to get more"}</Card.Meta>
+    </Card> 
+   
+    )
   }
 }
  

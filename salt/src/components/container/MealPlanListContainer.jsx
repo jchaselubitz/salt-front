@@ -26,7 +26,7 @@ class MealPlanListContainer extends Component {
 
   render() {
     return (
-      <div>
+      <div className="list-container" >
         {/* <ContainerNavComponent />; */}
         <PlanBlockList mealPlans={this.props.mealPlans} ShowPlanDetails={this.props.ShowPlanDetails} />
         <button onClick={this.createFormShowHide}>Create New</button>
