@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import PlanRecipeExtractor from '../PlanRecipeExtractor'
+import { Button, Checkbox, Form } from 'semantic-ui-react';
 
 class PlanDetails extends Component {
   
@@ -11,9 +11,8 @@ class PlanDetails extends Component {
   
   render() { 
     return (
-      <div>
-        
-        <h1>Start Date: {this.props.plan.start_date}</h1>
+      <div className="text-container">
+        <h3>Start Date: {this.props.plan.start_date}</h3>
         {this.getPlanRecipes().map(recipe => {
           return <div>
                     <p>{recipe.name}</p>

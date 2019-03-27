@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Card, Icon, Image } from 'semantic-ui-react'
 
 //BREADCRUMBS
 // app > library > RecipeContainer > RecipeBlockListComponent
@@ -22,14 +23,22 @@ import React, { Component } from "react";
 const RecipeCard = props => {
 
   return (
-    <div onClick={() => props.handleClick(props.recipe.id, "Recipe")}>
-      <img
-        className="recipe_img"
-        src={props.recipe.image}
-        alt={props.recipe.name}
-      />
-      <h1>{props.recipe.name}</h1>
-    </div>
+    <Card onClick={() => props.handleClick(props.recipe.id, "Recipe")}>
+    <Image src={props.recipe.image} alt={props.recipe.name}/>
+    <Card.Content>
+      <Card.Header>{props.recipe.name}</Card.Header>
+      <Card.Meta>
+        <span className='date'>Joined in 2015</span>
+      </Card.Meta>
+      <Card.Description>Matthew is a musician living in Nashville.</Card.Description>
+    </Card.Content>
+    <Card.Content extra>
+      <a>
+        <Icon name='like' />
+        22 likes
+      </a>
+    </Card.Content>
+  </Card>
   );
 };
 

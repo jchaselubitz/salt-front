@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
+import { Button, Form } from 'semantic-ui-react';
 import API from "../api";
 import { Redirect } from "react-router-dom";
 
@@ -19,16 +20,22 @@ class Login extends Component {
     };
   };
 
-  render() {
-    return (
-      <div>
-        <h2>Log In</h2>
-        <form onSubmit={this.login}>
-          <input type="text" name="email" />
-          <input type="text" name="password" />
-          <button value="submit">Log In</button>
-        </form>
-      </div>
+  render() { 
+    return ( 
+    <div className='account-form-container'>
+      <h2>Log In</h2>
+      <Form onSubmit={this.login}>
+      <Form.Field>
+      <label>Email Address:</label>
+       <input type="text" name="email"/>
+      </Form.Field>
+      <Form.Field>
+      <label>Password:</label>
+       <input type="text" name="password"/>
+      </Form.Field>
+       <Button value="submit">Log In</Button>
+      </Form>
+    </div> 
     );
   }
 }

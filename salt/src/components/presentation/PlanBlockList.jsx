@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import PlanCard from "./PlanCard";
 import { Link } from "react-router-dom";
+import {Card} from 'semantic-ui-react'
 
 class PlanBlockList extends Component {
   state = {};
 
   render() {
     return (
-      <div>
+      <Card.Group >
         {this.props.mealPlans.map(mealPlan => (
           <Link to={`/plan/${mealPlan.id}`}>
             <PlanCard
@@ -16,9 +17,10 @@ class PlanBlockList extends Component {
             />
           </Link>
         ))}
-      </div>
+      </Card.Group>
     );
   }
 }
+
 
 export default PlanBlockList;

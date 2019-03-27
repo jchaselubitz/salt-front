@@ -6,7 +6,7 @@ class LibraryContainer extends Component {
   state = {};
   render() {
     return (
-      <div>
+      <div className='list-container'>
         <ContainerNavComponent addButton={this.props.recipeAddButton} />
         <h1>Library</h1>
         <RecipeBlockListComponent
