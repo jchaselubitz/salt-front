@@ -5,12 +5,7 @@ class IngredientCard extends Component {
   state = {  }
 
   handleClick = (ingredient) => {
-    if (ingredient.have === false) {
-      ingredient.have = true
-    } else {
-      ingredient.have = false
-    }
-    console.log(ingredient.have)
+    ingredient.have === false ? ingredient.have = true : ingredient.have = false
     this.props.updateIngredient(ingredient)
   }
 

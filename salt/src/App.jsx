@@ -258,7 +258,6 @@ class App extends Component {
 
   //Needs to toggle in State AND send change to DB
   updateIngredient = (ingredient) => {
-    console.log("arrived")
     let newArray = this.state.ingredients.filter(ing => ing.id !== ingredient.id)
     newArray = [...newArray, ingredient]
     this.setState({ 
