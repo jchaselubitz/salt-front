@@ -5,7 +5,8 @@ import {
   NavLink,
   BrowserRouter as Router,
   Switch,
-  Redirect
+  Redirect,
+  withRouter
 } from "react-router-dom";
 // import { Redirect } from "react-router-dom";
 import "./App.css";
@@ -217,21 +218,21 @@ class App extends Component {
   };
 
   recipeAddButton = () => {
-    if (this.state.currentMainContainer === "Library") {
-      this.changeMainContState("Recipe");
-    }
+    this.props.history.push("/recipe");
   };
 
   recipeBackButton = () => {
-    if (this.state.currentMainContainer === "Recipe") {
-      this.changeMainContState("Library");
-    }
+    // if (this.state.currentMainContainer === "Recipe") {
+    //   this.changeMainContState("Library");
+    // }
+    this.props.history.goBack();
   };
 
   planBackButton = () => {
-    if (this.state.currentMainContainer === "Plan") {
-      this.changeMainContState("Plans");
-    }
+    // if (this.state.currentMainContainer === "Plan") {
+    //   this.changeMainContState("Plans");
+    // }
+    this.props.history.goBack();
   };
 
   deselectRecipeId = containerLabel => {
@@ -310,115 +311,125 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Router>
-          {/* <MainNavContainer
+        {/* <MainNavContainer
             handleClick={this.NavController}
             currentUserStatus={!!this.state.currentUser}
             login={this.showLoginForm}
             logout={this.logout}
           /> */}
 
-          {this.state.currentUser ? (
-            <NavLink to="/login" onClick={() => this.logout()}>
-              Logout
-            </NavLink>
-          ) : (
-            <NavLink to="/login"> Login </NavLink>
-          )}
+        {this.state.currentUser ? (
+          <NavLink to="/login" onClick={() => this.logout()}>
+            Logout
+          </NavLink>
+        ) : (
+          <NavLink to="/login"> Login </NavLink>
+        )}
 
-          <NavLink to="/"> Home </NavLink>
-          <NavLink to="/library"> Library </NavLink>
-          <NavLink to="/plans"> Meal Plans </NavLink>
-          <NavLink to="/list"> shopping list </NavLink>
-          <NavLink to="/settings"> settings </NavLink>
-          <div>
-            <Route
-              exact
-              path="/"
-              render={() =>
-                !this.state.currentUser ? <Redirect to="/login" /> : <Home />
-              }
-            />
+        <NavLink to="/"> Home </NavLink>
+        <NavLink to="/library"> Library </NavLink>
+        <NavLink to="/plans"> Meal Plans </NavLink>
+        <NavLink to="/list"> shopping list </NavLink>
+        <NavLink to="/settings"> settings </NavLink>
+        <div>
+          <Route
+            exact
+            path="/"
+            render={() =>
+              !this.state.currentUser ? <Redirect to="/login" /> : <Home />
+            }
+          />
 
-            <Route
-              path="/library"
-              component={() => (
-                <LibraryContainer
-                  recipeAddButton={this.recipeAddButton}
-                  recipes={this.state.recipes}
-                  ShowCardDetails={this.ShowCardDetails}
-                />
-              )}
-            />
+          <Route
+            path="/library"
+            component={() => (
+              <LibraryContainer
+                recipeAddButton={this.recipeAddButton}
+                recipes={this.state.recipes}
+                ShowCardDetails={this.ShowCardDetails}
+              />
+            )}
+          />
 
-            <Route
-              exact
-              path={`/recipe/:recipeId`}
-              component={() => (
-                <RecipeContainer
-                  addNewRecipe={this.addNewRecipe}
-                  ingredients={this.state.ingredients}
-                  recipe={this.findSelectedRecipe()}
-                  recipeBackButton={this.recipeBackButton}
-                />
-              )}
-            />
+          <Route
+            path={`/recipe/:recipeId`}
+            component={() => (
+              <RecipeContainer
+                addNewRecipe={this.addNewRecipe}
+                ingredients={this.state.ingredients}
+                recipe={this.findSelectedRecipe()}
+                recipeBackButton={this.recipeBackButton}
+              />
+            )}
+          />
 
-            <Route
-              exact
-              path="/plans"
-              component={() => (
-                <MealPlanListContainer
-                  recipes={this.state.recipes}
-                  mealPlans={this.state.plans}
-                  addNewPlan={this.addNewPlan}
-                  ShowPlanDetails={this.ShowPlanDetails}
-                />
-              )}
-            />
+          <Route
+            path={`/recipe`}
+            component={() => (
+              <RecipeContainer
+                addNewRecipe={this.addNewRecipe}
+                ingredients={this.state.ingredients}
+                recipe={this.findSelectedRecipe()}
+                recipeBackButton={this.recipeBackButton}
+              />
+            )}
+          />
 
-            <Route
-              exact
-              path={`/plan/:planId`}
-              component={() => (
-                <PlanContainer
-                  plans={this.state.plans}
-                  plan={this.findSelectedPlan()}
-                  recipes={this.state.recipes}
-                />
-              )}
-            />
+          <Route
+            exact
+            path="/plans"
+            component={() => (
+              <MealPlanListContainer
+                recipes={this.state.recipes}
+                mealPlans={this.state.plans}
+                addNewPlan={this.addNewPlan}
+                ShowPlanDetails={this.ShowPlanDetails}
+              />
+            )}
+          />
 
-            <Route
-              exact
-              path="/list"
-              component={() => (
-                <ShoppingListContainer
-                  mealPlans={this.state.plans}
-                  recipes={this.state.recipes}
-                  updateIngredient={this.updateIngredient}
-                  ingredients={this.state.ingredients}
-                />
-              )}
-            />
+          <Route
+            exact
+            path={`/plan/:planId`}
+            component={() => (
+              <PlanContainer
+                planBackButton={this.planBackButton}
+                plans={this.state.plans}
+                plan={this.findSelectedPlan()}
+                recipes={this.state.recipes}
+              />
+            )}
+          />
 
-            <Route exact path="/settings" component={SettingsContainer} />
+          <Route
+            exact
+            path="/list"
+            component={() => (
+              <ShoppingListContainer
+                mealPlans={this.state.plans}
+                recipes={this.state.recipes}
+                updateIngredient={this.updateIngredient}
+                ingredients={this.state.ingredients}
+              />
+            )}
+          />
 
-            <Route
-              path="/login"
-              render={() =>
-                this.state.currentUser ? (
-                  <Redirect to="/" />
-                ) : (
-                  <Login setUser={this.setUser} />
-                )
-              }
-            />
-          </div>
-        </Router>
+          <Route exact path="/settings" component={SettingsContainer} />
+
+          <Route
+            path="/login"
+            render={() =>
+              this.state.currentUser ? (
+                <Redirect to="/" />
+              ) : (
+                <Login setUser={this.setUser} />
+              )
+            }
+          />
+        </div>
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
