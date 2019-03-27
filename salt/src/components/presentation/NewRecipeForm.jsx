@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Checkbox, Form } from 'semantic-ui-react'
+import { Button, Input, Form } from 'semantic-ui-react'
 
 const CATEGORY = [
   "Produce",
@@ -22,7 +22,7 @@ class NewRecipeForm extends Component {
   };
 
   handleFieldChange = event => {
-    console.log(event.target)
+    console.log(event.target.name, event.target.value)
     if (
       ["ingredient_name", "qty", "unit", "ingredient_category"].includes(
         event.target.name
@@ -61,29 +61,28 @@ class NewRecipeForm extends Component {
     this.props.addNewRecipe(newRecipe);
   };
 
-  IngredientOptions = (id) => { 
-    return this.props.ingredients.map((ing, id) => ({
-      key: id,
-      text: ing.name,
-      value: ing.name,
-    }))
-  }
+  // ingredientOptions = () => { 
+  //   return this.props.ingredients.map((ing, i) => console.log("option", ing) ({
+  //     key: i,
+  //     value: ing.name
+  //   }))
+  // }
 
-  unitOptions = () => { 
-    return UNITS.map((unit, i) => ({
-      key: i,
-      text: unit,
-      value: unit,
-    }))
-  }
+  // unitOptions = () => { 
+  //   return UNITS.map((unit, i) => ({
+  //     key: i,
+  //     text: unit,
+  //     value: unit,
+  //   }))
+  // }
 
-  categoryOptions = () => { 
-    return CATEGORY.map((category, i) => ({
-      key: i,
-      text: category,
-      value: category,
-    }))
-  }
+  // categoryOptions = () => { 
+  //   return CATEGORY.map((category, i) => ({
+  //     key: i,
+  //     text: category,
+  //     value: category,
+  //   }))
+  // }
 
   render() {
     return (
@@ -122,7 +121,20 @@ class NewRecipeForm extends Component {
               <div key={index}>
                 {/* ingredient name  */}
                 {/* <Form.Input list="ingredient_name" data-id={index} name="ingredient_name" /> */}
-                <Form.Dropdown id="ingredient_name" name="ingredient_name" data-id={index} search selection options={this.ingredientOptions()}/>
+
+                {/* <Form.Dropdown name="ingredient_name" id={index} search selection options={this.ingredientOptions()}/> */}
+
+                <Input list='Ingredients' placeholder='Choose an ingredient' />
+                <datalist
+                  id="Ingredients"
+                  name="ingredient_name"
+                  data-id={index}
+                >
+                  {this.props.ingredients.map(ing => (
+                    <option value={ing.name} />
+                  ))}
+                </datalist>
+
              
                 {/* ingredient qty */}
                 <Form.Input
@@ -136,11 +148,11 @@ class NewRecipeForm extends Component {
 
                 {/* ingredient units */}
                 {/* <input list="units" value={ingredient.unit} /> */}
-                <Form.Select  label='Unit' id="Units" placeholder='Unit' name="unit" data-id={index} options={this.unitOptions()} />
+                {/* <Form.Select  label='Unit' id="Units" placeholder='Unit' name="unit" data-id={index} options={this.unitOptions()} /> */}
              {/* WORKS UNTIL HERE */}
 
                 {/* ingredient ingredient category */}
-                <Form.Select  label='Category' id="ingredient_category" placeholder='Category' name="ingredient_category" data-id={index} options={this.categoryOptions()} />
+                {/* <Form.Select  label='Category'  placeholder='Category' name="ingredient_category" data-id={index} options={this.categoryOptions()} /> */}
               
                
 
