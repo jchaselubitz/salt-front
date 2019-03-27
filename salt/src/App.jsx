@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
+
 import "./App.css";
 import MainNavContainer from "./components/container/MainNavContainer";
 import LibraryContainer from "./components/container/LibraryContainer";
@@ -11,7 +12,7 @@ import SettingsContainer from "./components/container/SettingsContainer";
 import Home from "./components/container/Home";
 import Login from "./components/container/Login";
 import API from "./api";
-import PlanRecipeExtractor from './components/PlanRecipeExtractor'
+import PlanRecipeExtractor from "./components/PlanRecipeExtractor";
 
 class App extends Component {
   state = {
@@ -23,8 +24,6 @@ class App extends Component {
     selectedRecipeId: undefined,
     selectedPlanId: undefined
   };
-
- 
 
   componentDidMount() {
     API.getRecipes().then(recipes => this.setState({ recipes }));
@@ -39,6 +38,8 @@ class App extends Component {
       }
     });
   }
+
+  // =============================== Router ==============================================
 
   //============================= LOGIN/AUTH ==============================================
 
@@ -112,7 +113,6 @@ class App extends Component {
             mealPlans={this.state.plans}
             addNewPlan={this.addNewPlan}
             ShowPlanDetails={this.ShowPlanDetails}
-
           />
         );
       case "Plan":
@@ -204,7 +204,6 @@ class App extends Component {
   // plan={this.findSelectedPlan()}
   // recipes={this.state.recipes}
 
-
   selectedPlan = planId => {
     this.setState({
       selectedPlanId: planId
@@ -216,7 +215,7 @@ class App extends Component {
     let selectedPlanArray = this.state.plans.find(
       plan => plan.id === this.state.selectedPlanId
     );
-    return selectedPlanArray
+    return selectedPlanArray;
   };
 
   addNewPlan = planObject => {
