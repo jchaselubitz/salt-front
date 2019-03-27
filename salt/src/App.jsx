@@ -46,6 +46,12 @@ class App extends Component {
     ;
   };
 
+  showLoginForm = () => {
+    this.setState({
+      currentMainContainer: "Login"
+    });
+  };
+
   logout = () => {
     localStorage.removeItem("token");
     this.setState({
@@ -57,12 +63,6 @@ class App extends Component {
       currentUser: undefined
     });
     window.location.reload();
-  };
-
-  showLoginForm = () => {
-    this.setState({
-      currentMainContainer: "Login"
-    });
   };
 
   //============================= DRAW APPLICATION ==============================================
@@ -106,6 +106,8 @@ class App extends Component {
             plans={this.state.plans}
             plan={this.findSelectedPlan()}
             recipes={this.state.recipes}
+            addNewPlan={this.addNewPlan}
+            planBackButton={this.planBackButton}
           />
         );
       case "List":
@@ -186,10 +188,6 @@ class App extends Component {
     this.selectedPlan(planId);
     this.changeMainContState(label);
   };
-
-  // plans={this.state.plans}
-  // plan={this.findSelectedPlan()}
-  // recipes={this.state.recipes}
 
 
   selectedPlan = planId => {
