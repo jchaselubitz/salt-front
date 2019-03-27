@@ -1,5 +1,12 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
+import {
+  Route,
+  Link,
+  BrowserRouter,
+  Switch,
+  Redirect as Router
+} from "react-router-dom";
 import "./App.css";
 import MainNavContainer from "./components/container/MainNavContainer";
 import LibraryContainer from "./components/container/LibraryContainer";
@@ -11,7 +18,7 @@ import SettingsContainer from "./components/container/SettingsContainer";
 import Home from "./components/container/Home";
 import Login from "./components/Login";
 import API from "./api";
-import PlanRecipeExtractor from './components/PlanRecipeExtractor'
+import PlanRecipeExtractor from "./components/PlanRecipeExtractor";
 
 class App extends Component {
   state = {
@@ -25,8 +32,38 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.setUser()
+    this.setUser();
   }
+
+  //================================== ROUTER =============================================
+  SetPage = label => {
+    this.props.handleClick(label);
+  };
+
+  logInOut = () => {
+    if (this.props.currentUserStatus) {
+      return <button onClick={() => this.props.logout()}>Log Out</button>;
+    } else {
+      return <button onClick={() => this.props.login()}>Log In</button>;
+    }
+  };
+
+  routing = (
+    <Router>
+      <div>
+        <nav>
+          <button onClick={() => this.SetPage("Home")}>Home</button>
+          <button onClick={() => this.SetPage("Library")}>Library</button>
+          <button onClick={() => this.SetPage("Recipe")}>Recipe</button>
+          <button onClick={() => this.SetPage("Plans")}>Plans</button>
+          {this.logInOut()}
+          <button onClick={() => this.SetPage("List")}>Shopping List</button>
+        </nav>
+        <Route exact path="/" component={App} />
+        <Route path="/login" component={Login} />
+      </div>
+    </Router>
+  );
 
   //============================= LOGIN/AUTH ==============================================
 
@@ -34,16 +71,17 @@ class App extends Component {
     API.getProfile().then(userObject => {
       if (userObject.error) {
         this.logout();
-        this.showLoginForm() //ROUTE: Login
+        this.showLoginForm(); //ROUTE: Login
       } else {
-        this.setState({ currentUser: userObject.user })
+        this.setState({ currentUser: userObject.user });
         API.getRecipes().then(recipes => this.setState({ recipes }));
-        API.getIngredients().then(ingredients => this.setState({ ingredients }));
+        API.getIngredients().then(ingredients =>
+          this.setState({ ingredients })
+        );
         API.getPlans().then(plans => this.setState({ plans }));
-        // this.props.history.push("/home");
+        //this.props.history.push("/");
       }
     });
-    ;
   };
 
   showLoginForm = () => {
@@ -72,7 +110,7 @@ class App extends Component {
       case "Home":
         return <Home />;
       case "Login":
-        return <Login login={this.login} setUser={this.setUser}/>;
+        return <Login login={this.login} setUser={this.setUser} />;
       case "Library":
         return (
           <LibraryContainer
@@ -97,7 +135,6 @@ class App extends Component {
             mealPlans={this.state.plans}
             addNewPlan={this.addNewPlan}
             ShowPlanDetails={this.ShowPlanDetails}
-
           />
         );
       case "Plan":
@@ -201,7 +238,7 @@ class App extends Component {
     let selectedPlanArray = this.state.plans.find(
       plan => plan.id === this.state.selectedPlanId
     );
-    return selectedPlanArray
+    return selectedPlanArray;
   };
 
   addNewPlan = planObject => {
@@ -240,16 +277,16 @@ class App extends Component {
   };
 
   //Needs to toggle in State AND send change to DB
-  updateIngredient = (ingredient) => {
-    let newArray = this.state.ingredients.filter(ing => ing.id !== ingredient.id)
-    newArray = [...newArray, ingredient]
-    this.setState({ 
+  updateIngredient = ingredient => {
+    let newArray = this.state.ingredients.filter(
+      ing => ing.id !== ingredient.id
+    );
+    newArray = [...newArray, ingredient];
+    this.setState({
       ingredients: newArray
-    })
-    API.updateIngredient(ingredient)
-    .then(resp => console.log(resp))
-    
-  }
+    });
+    API.updateIngredient(ingredient).then(resp => console.log(resp));
+  };
 
   render() {
     return (
