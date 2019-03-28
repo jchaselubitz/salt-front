@@ -22,7 +22,6 @@ class NewRecipeForm extends Component {
   };
 
   handleFieldChange = event => {
-    console.log(event.target, event.target.value)
     if (
       ["ingredient_name", "qty", "unit", "ingredient_category"].includes(
         event.target.name

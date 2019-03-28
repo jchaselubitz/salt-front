@@ -371,7 +371,7 @@ class App extends Component {
           />
 
           <Route
-            exact path={`/recipe/:recipeId`}
+            path={`/recipe/:recipeId`}
             component={() => (
               <RecipeContainer
                 addNewRecipe={this.addNewRecipe}
@@ -383,7 +383,7 @@ class App extends Component {
           />
 
           <Route
-            exact path={`/recipe`}
+            path={`/recipe`}
             component={() => (
               <RecipeContainer
                 addNewRecipe={this.addNewRecipe}
