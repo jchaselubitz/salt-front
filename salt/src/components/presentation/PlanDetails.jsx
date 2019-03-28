@@ -8,6 +8,8 @@ class PlanDetails extends Component {
       return this.props.recipes.find(r => r.id === recipeId.id) 
     })
   }
+
+ 
   
   render() { 
     return (
@@ -16,10 +18,13 @@ class PlanDetails extends Component {
         {this.getPlanRecipes().map(recipe => {
           return <div>
                     <p>{recipe.name}</p>
+                    
                     </div>
         })}
-  
-      
+        
+        <Button onClick={() => this.props.delete(this.props.plan.id)} content="delete" />
+        <Button onClick={() => this.props.edit(this.props.plan.id)} content="Edit" />
+
       </div>
     );
   }

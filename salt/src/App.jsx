@@ -272,6 +272,11 @@ class App extends Component {
     );
   };
 
+  deletePlan = (planId) => {
+    this.setState({ plans: this.state.plans.filter(plan => planId !== plan.id) })
+    API.deletePlan(planId)
+  }
+
   addNewRecipe = recipe => {
     recipe.user_id = this.state.currentUser.id;
 
@@ -403,6 +408,7 @@ class App extends Component {
                 mealPlans={this.state.plans}
                 addNewPlan={this.addNewPlan}
                 ShowPlanDetails={this.ShowPlanDetails}
+                delete={this.props.deletePlan}
               />
             )}
           />
@@ -416,6 +422,7 @@ class App extends Component {
                 plans={this.state.plans}
                 plan={this.findSelectedPlan()}
                 recipes={this.state.recipes}
+                delete={this.deletePlan}
               />
             )}
           />

@@ -126,6 +126,18 @@ const updateIngredient = ingredient => {
   return postAndPostFunction(`${ingredientUrl}/${ingredient.id}`, options);
 };
 
+//============================= PATCH FUNCTIONS ==============================================
+
+const deletePlan = planId => {
+  const options = {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" ,
+    Authorization: localStorage.getItem("token")}
+  };
+  return postAndPostFunction(`${planUrl}/${planId}`, options);
+};
+
+
 //============================= PRIMARY PATCH AND POST FUNCTION ==============================================
 
 const postAndPostFunction = (url, options) => {
@@ -154,5 +166,6 @@ export default {
   createRecipePlans,
   createRecipeQtyIngredients,
   postRecipe,
-  updateIngredient
+  updateIngredient,
+  deletePlan
 };

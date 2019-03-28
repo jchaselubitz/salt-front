@@ -20,7 +20,7 @@ class PlanContainer extends Component {
       <div>
         <ContainerNavComponent backButton={this.props.planBackButton} />
         {this.props.plan ? 
-        <PlanDetails plan={this.props.plan} recipes={this.props.recipes} />
+        <PlanDetails plan={this.props.plan} recipes={this.props.recipes} delete={this.props.delete} edit={this.props.edit}/>
         :
         <CreatePlanForm recipes={this.props.recipes} addNewPlan={this.props.addNewPlan} /> }
       </div>
