@@ -46,3 +46,12 @@
 .menu_item {
   justify-content: center;
 }
+
+/* .logo {
+  width: 500px;
+} */
+
+.welcome {
+  margin: auto;
+  width: 600px;
+}

@@ -1,9 +1,14 @@
 import React, { Component } from "react";
+import welcome from "../images/Salt.png";
 
 class Home extends Component {
   state = {};
   render() {
-    return <h1>HOME</h1>;
+    return (
+      <div>
+        <img className="welcome" src={welcome} alt="welcome to salt" />
+      </div>
+    );
   }
 }
 

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
+// import logo from "./logo.svg";
 import {
   Route,
   NavLink,
@@ -23,6 +23,7 @@ import Login from "./components/Login";
 import API from "./api";
 import PlanRecipeExtractor from "./components/PlanRecipeExtractor";
 import { Icon, Menu } from "semantic-ui-react";
+import logo from "./components/images/logo.png";
 
 class App extends Component {
   state = {
@@ -320,7 +321,7 @@ class App extends Component {
     return (
       <Menu fluid icon="labeled" className="menu">
         <Menu.Item className="menu_item" as={Link} name="home" to="/">
-          Home
+          <img className="logo" src={logo} alt="salt" />
         </Menu.Item>
 
         <Menu.Item className="menu_item" as={Link} name="home" to="/">
