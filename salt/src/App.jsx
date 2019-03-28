@@ -128,63 +128,63 @@ class App extends Component {
 
   //============================= DRAW APPLICATION ==============================================
 
-  displayMainCont = () => {
-    switch (this.state.currentMainContainer) {
-      case "Home":
-        return <Home />;
-      case "Login":
-        return <Login setUser={this.setUser} />;
-      case "Library":
-        return (
-          <LibraryContainer
-            recipeAddButton={this.recipeAddButton}
-            recipes={this.state.recipes}
-            ShowCardDetails={this.ShowCardDetails}
-          />
-        );
-      case "Recipe":
-        return (
-          <RecipeContainer
-            addNewRecipe={this.addNewRecipe}
-            ingredients={this.state.ingredients}
-            recipe={this.findSelectedRecipe()}
-            recipeBackButton={this.recipeBackButton}
-          />
-        );
-      case "Plans":
-        return (
-          <MealPlanListContainer
-            recipes={this.state.recipes}
-            mealPlans={this.state.plans}
-            addNewPlan={this.addNewPlan}
-            ShowPlanDetails={this.ShowPlanDetails}
-          />
-        );
-      case "Plan":
-        return (
-          <PlanContainer
-            plans={this.state.plans}
-            plan={this.findSelectedPlan()}
-            recipes={this.state.recipes}
-            addNewPlan={this.addNewPlan}
-            planBackButton={this.planBackButton}
-          />
-        );
-      case "List":
-        return (
-          <ShoppingListContainer
-            mealPlans={this.state.plans}
-            recipes={this.state.recipes}
-            updateIngredient={this.updateIngredient}
-            ingredients={this.state.ingredients}
-          />
-        );
-      case "Settings":
-        return <SettingsContainer />;
-      default:
-        return <Home />;
-    }
-  };
+  // displayMainCont = () => {
+  //   switch (this.state.currentMainContainer) {
+  //     case "Home":
+  //       return <Home />;
+  //     case "Login":
+  //       return <Login setUser={this.setUser} />;
+  //     case "Library":
+  //       return (
+  //         <LibraryContainer
+  //           recipeAddButton={this.recipeAddButton}
+  //           recipes={this.state.recipes}
+  //           ShowCardDetails={this.ShowCardDetails}
+  //         />
+  //       );
+  //     case "Recipe":
+  //       return (
+  //         <RecipeContainer
+  //           addNewRecipe={this.addNewRecipe}
+  //           ingredients={this.state.ingredients}
+  //           recipe={this.findSelectedRecipe()}
+  //           recipeBackButton={this.recipeBackButton}
+  //         />
+  //       );
+  //     case "Plans":
+  //       return (
+  //         <MealPlanListContainer
+  //           recipes={this.state.recipes}
+  //           mealPlans={this.state.plans}
+  //           addNewPlan={this.addNewPlan}
+  //           ShowPlanDetails={this.ShowPlanDetails}
+  //         />
+  //       );
+  //     case "Plan":
+  //       return (
+  //         <PlanContainer
+  //           plans={this.state.plans}
+  //           plan={this.findSelectedPlan()}
+  //           recipes={this.state.recipes}
+  //           addNewPlan={this.addNewPlan}
+  //           planBackButton={this.planBackButton}
+  //         />
+  //       );
+  //     case "List":
+  //       return (
+  //         <ShoppingListContainer
+  //           mealPlans={this.state.plans}
+  //           recipes={this.state.recipes}
+  //           updateIngredient={this.updateIngredient}
+  //           ingredients={this.state.ingredients}
+  //         />
+  //       );
+  //     case "Settings":
+  //       return <SettingsContainer />;
+  //     default:
+  //       return <Home />;
+  //   }
+  // };
 
   changeMainContState = containerLabel => {
     this.deselectRecipeId(containerLabel);
@@ -382,7 +382,7 @@ class App extends Component {
             )}
           />
 
-          <Route
+          {/* <Route
             path={`/recipe`}
             component={() => (
               <RecipeContainer
@@ -392,7 +392,7 @@ class App extends Component {
                 recipeBackButton={this.recipeBackButton}
               />
             )}
-          />
+          /> */}
 
           <Route
             exact
