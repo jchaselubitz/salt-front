@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Input, Form } from 'semantic-ui-react'
+import { Button, Input, Form, Select} from 'semantic-ui-react'
 
 const CATEGORY = [
   "Produce",
@@ -22,14 +22,14 @@ class NewRecipeForm extends Component {
   };
 
   handleFieldChange = event => {
-    console.log(event.target.name, event.target.value)
+    console.log(event.target, event.target.value)
     if (
       ["ingredient_name", "qty", "unit", "ingredient_category"].includes(
         event.target.name
       )
     ) {
       let ingredients = [...this.state.ingredients];
-      ingredients[event.target.dataset.id][event.target.name] =
+      ingredients[event.target.id][event.target.name] =
         event.target.value;
       this.setState({ ingredients });
     } else {
@@ -61,28 +61,28 @@ class NewRecipeForm extends Component {
     this.props.addNewRecipe(newRecipe);
   };
 
-  // ingredientOptions = () => { 
-  //   return this.props.ingredients.map((ing, i) => console.log("option", ing) ({
-  //     key: i,
-  //     value: ing.name
-  //   }))
-  // }
+  ingredientOptions = () => { 
+    return this.props.ingredients.map((ing, i) => console.log("option", ing) ({
+      key: i,
+      value: ing.name
+    }))
+  }
 
-  // unitOptions = () => { 
-  //   return UNITS.map((unit, i) => ({
-  //     key: i,
-  //     text: unit,
-  //     value: unit,
-  //   }))
-  // }
+  unitOptions = () => { 
+    return UNITS.map((unit, i) => ({
+      key: i,
+      text: unit,
+      value: unit,
+    }))
+  }
 
-  // categoryOptions = () => { 
-  //   return CATEGORY.map((category, i) => ({
-  //     key: i,
-  //     text: category,
-  //     value: category,
-  //   }))
-  // }
+  categoryOptions = () => { 
+    return CATEGORY.map((category, i) => ({
+      key: i,
+      text: category,
+      value: category,
+    }))
+  }
 
   render() {
     return (
@@ -123,23 +123,28 @@ class NewRecipeForm extends Component {
                 {/* <Form.Input list="ingredient_name" data-id={index} name="ingredient_name" /> */}
 
                 {/* <Form.Dropdown name="ingredient_name" id={index} search selection options={this.ingredientOptions()}/> */}
-
-                <Input list='Ingredients' placeholder='Choose an ingredient' />
-                <datalist
-                  id="Ingredients"
+                <input
+                  list="ingredient_name"
+                  id={index}
                   name="ingredient_name"
-                  data-id={index}
+                  //   value={ingredient.ingredient_name}
+                />
+                <datalist
+                  id="ingredient_name"
+                  name="ingredient_name"
+                  id={index}
                 >
                   {this.props.ingredients.map(ing => (
                     <option value={ing.name} />
                   ))}
                 </datalist>
 
-             
                 {/* ingredient qty */}
-                <Form.Input
+
+                <input
                   type="number"
-                  data-id={index}
+                  fluid
+                  id={index}
                   label="Qty"
                   placeholder="Quantity"
                   name="qty"
@@ -148,13 +153,25 @@ class NewRecipeForm extends Component {
 
                 {/* ingredient units */}
                 {/* <input list="units" value={ingredient.unit} /> */}
-                {/* <Form.Select  label='Unit' id="Units" placeholder='Unit' name="unit" data-id={index} options={this.unitOptions()} /> */}
-             {/* WORKS UNTIL HERE */}
+                <select  name="unit" id={index}>
+                  <option value="" disabled selected>
+                    units
+                  </option>
+                  {UNITS.map(unit => (
+                    <option value={unit}>{unit}</option>
+                  ))}
+                </select>
 
                 {/* ingredient ingredient category */}
-                {/* <Form.Select  label='Category'  placeholder='Category' name="ingredient_category" data-id={index} options={this.categoryOptions()} /> */}
-              
-               
+
+                <select name="ingredient_category" id={index}>
+                  <option value="" disabled selected>
+                    Ingredient category
+                  </option>
+                  {CATEGORY.map(category => (
+                    <option value={category}>{category}</option>
+                  ))}
+</select>
 
                   <Button onClick={() => this.removeIngredient(index)}>
                    Remove

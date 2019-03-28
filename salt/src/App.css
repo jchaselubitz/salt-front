@@ -9,9 +9,11 @@
   padding: 20px;
 }
 
-/* .App-link {
-  color: #61dafb;
-} */
+
+.Link {
+  color: #023b4b;
+
+}
 
 @keyframes App-logo-spin {
   from {

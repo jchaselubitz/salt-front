@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Menu } from 'semantic-ui-react'
 import logo from "./logo.svg";
 import {
   Route,
@@ -276,7 +277,7 @@ class App extends Component {
 
     const options = {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", Authorization: localStorage.getItem("token")},
       body: JSON.stringify(recipe)
     };
 
@@ -308,9 +309,12 @@ class App extends Component {
     API.updateIngredient(ingredient).then(resp => console.log(resp));
   };
 
+
+        
   render() {
     return (
       <div className="App">
+      <Menu className="Link" >
         {/* <MainNavContainer
             handleClick={this.NavController}
             currentUserStatus={!!this.state.currentUser}
@@ -319,18 +323,33 @@ class App extends Component {
           /> */}
 
         {this.state.currentUser ? (
-          <NavLink to="/login" onClick={() => this.logout()}>
+          <Menu.Item>
+          <NavLink to="/login" onClick={() => this.logout()} className="Link">
             Logout
           </NavLink>
-        ) : (
-          <NavLink to="/login"> Login </NavLink>
-        )}
+          </Menu.Item>
 
-        <NavLink to="/"> Home </NavLink>
-        <NavLink to="/library"> Library </NavLink>
-        <NavLink to="/plans"> Meal Plans </NavLink>
-        <NavLink to="/list"> shopping list </NavLink>
-        <NavLink to="/settings"> settings </NavLink>
+        ) : (
+          <Menu.Item>
+          <NavLink to="/login"  className="Link" > Login </NavLink>
+          </Menu.Item>
+        )}
+        <Menu.Item>
+        <NavLink  className="Link" to="/"> Home </NavLink>
+        </Menu.Item>
+        <Menu.Item>
+        <NavLink className="Link" to="/library"> Library </NavLink>
+        </Menu.Item>
+        <Menu.Item> 
+        <NavLink className="Link" to="/plans"> Meal Plans </NavLink>
+        </Menu.Item>
+        <Menu.Item> 
+        <NavLink className="Link" to="/list"> shopping list </NavLink>
+        </Menu.Item>
+        <Menu.Item> 
+        <NavLink className="Link" to="/settings"> settings </NavLink>
+        </Menu.Item>
+        </Menu>
         <div>
           <Route
             exact
