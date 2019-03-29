@@ -52,36 +52,6 @@ class App extends Component {
     }
   };
 
-  // routing = (
-  //   <Router>
-  //     <div>
-  //       <nav>
-  //         <button onClick={() => this.SetPage("Home")}>
-  //           <Link to={"/"} className="nav-link">
-  //             {" "}
-  //             Home{" "}
-  //           </Link>
-  //         </button>
-  //         <button>
-  //           <Link to={"/login"} className="nav-link">
-  //             {" "}
-  //             Login{" "}
-  //           </Link>
-  //         </button>
-  //         ;
-  //         {/* <button onClick={() => this.SetPage("Library")}>Library</button>
-  //         <button onClick={() => this.SetPage("Recipe")}>Recipe</button>
-  //         <button onClick={() => this.SetPage("Plans")}>Plans</button>
-  //         {this.logInOut()}
-  //         <button onClick={() => this.SetPage("List")}>Shopping List</button>
-  //        */}
-  //       </nav>
-  //       <Route exact path="/" component={App} />
-  //       <Route path="/login" component={Login} />
-  //     </div>
-  //   </Router>
-  // );
-
   //============================= LOGIN/AUTH ==============================================
 
   setUser = () => {
@@ -303,28 +273,21 @@ class App extends Component {
         selectedRecipeId: recipe.id
       });
     });
-    // .then(recipe =>
-    //   this.setState({ recipes: [...this.state.recipes, recipe] })
-    // );
   };
 
-  //Needs to toggle in State AND send change to DB
-  updateIngredient = ingredient => {
-    let newArray = this.state.ingredients.filter(
-      ing => ing.id !== ingredient.id
+  updateIngredient = id => {
+    let ingredients = this.state.ingredients.map(ingredient =>
+      ingredient.id === id
+        ? { ...ingredient, have: !ingredient.have }
+        : ingredient
     );
-    newArray = [...newArray, ingredient];
-    this.setState({
-      ingredients: newArray
-    });
-    API.updateIngredient(ingredient).then(resp => console.log(resp));
-  };
+    this.setState({ ingredients }, () => {
+      let ingredient = [];
+      ingredient = this.state.ingredients.filter(ing => ing.id === id);
 
-  // redirect(to) {
-  //   browserHistory.push({
-  //     pathname: to
-  //   });
-  // }
+      API.updateIngredient(ingredient[0]).then(resp => console.log(resp));
+    });
+  };
 
   navBar = () => {
     return (
@@ -465,7 +428,7 @@ class App extends Component {
           <Route
             exact
             path="/list"
-            component={() => (
+            render={() => (
               <ShoppingListContainer
                 mealPlans={this.state.plans}
                 recipes={this.state.recipes}
