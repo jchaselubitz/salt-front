@@ -2,27 +2,37 @@ import React, { Component } from "react";
 import ContainerNavComponent from "../presentation/ContainerNavComponent";
 import PlanDetails from "../presentation/PlanDetails";
 import CreatePlanForm from "../presentation/CreatePlanForm";
-import { Button, Card, Image } from 'semantic-ui-react'
+import { Button, Card, Image } from "semantic-ui-react";
 
 // plan={this.state.recipes}
 // mealPlans={this.findSelectedPlan()}
 // recipes={this.state.recipes}
 
 //BREADCRUMBS
-// app 
+// app
 
 class PlanContainer extends Component {
   state = {};
-  
+
   render() {
-    console.log(this.props.plan)
+    console.log(this.props.plan);
     return (
       <div>
         <ContainerNavComponent backButton={this.props.planBackButton} />
-        {this.props.plan ? 
-        <PlanDetails plan={this.props.plan} recipes={this.props.recipes} delete={this.props.delete} edit={this.props.edit}/>
-        :
-        <CreatePlanForm recipes={this.props.recipes} addNewPlan={this.props.addNewPlan} /> }
+        {this.props.plan ? (
+          <PlanDetails
+            plan={this.props.plan}
+            recipes={this.props.recipes}
+            delete={this.props.delete}
+            edit={this.props.edit}
+            handleClick={this.props.ShowCardDetails}
+          />
+        ) : (
+          <CreatePlanForm
+            recipes={this.props.recipes}
+            addNewPlan={this.props.addNewPlan}
+          />
+        )}
       </div>
     );
   }

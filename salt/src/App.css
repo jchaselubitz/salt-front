@@ -139,3 +139,10 @@ input:focus {
 .title {
   font-family: "Old Standard TT", serif;
 }
+
+.plan_list {
+  margin-top: 50px;
+}
+
+.login_page {
+}

@@ -328,7 +328,7 @@ class App extends Component {
 
   navBar = () => {
     return (
-      <Menu fluid icon="labeled" className="menu">
+      <Menu fluid horizonal icon="labeled" className="menu">
         <Menu.Item className="menu_item" as={Link} name="home" to="/">
           <img className="logo" src={logo} alt="salt" />
         </Menu.Item>
@@ -423,6 +423,7 @@ class App extends Component {
           />
 
           <Route
+            exact
             path={`/recipe`}
             component={() => (
               <RecipeContainer
@@ -458,6 +459,7 @@ class App extends Component {
                 plan={this.findSelectedPlan()}
                 recipes={this.state.recipes}
                 delete={this.deletePlan}
+                ShowCardDetails={this.ShowCardDetails}
               />
             )}
           />

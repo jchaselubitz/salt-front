@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import RecipeCard from "./RecipeCard";
 import { Link } from "react-router-dom";
+import { Grid, Segment } from "semantic-ui-react";
 
 //BREADCRUMBS
 // app > library > RecipeContainer
@@ -15,12 +16,19 @@ class RecipeBlockListComponent extends Component {
 
   render() {
     return (
-      <div >
-        {this.props.recipes.map(recipe => (
-          <Link to={`/recipe/${recipe.id}`}>
-            <RecipeCard recipe={recipe} handleClick={this.props.handleClick} />{" "}
-          </Link>
-        ))}
+      <div>
+        <Grid doubling columns={5}>
+          {this.props.recipes.map(recipe => (
+            <Grid.Column>
+              <Link to={`/recipe/${recipe.id}`}>
+                <RecipeCard
+                  recipe={recipe}
+                  handleClick={this.props.handleClick}
+                />{" "}
+              </Link>
+            </Grid.Column>
+          ))}
+        </Grid>
       </div>
     );
   }
