@@ -1,5 +1,3 @@
-
-
 .list-container {
   padding: 20px;
   align-items: center;
@@ -25,11 +23,9 @@
 }
 
 .have-ingredient-false {
-
 }
 
 .have-ingredient-true {
-  
 }
 
 .account-form-container {
@@ -42,4 +38,22 @@
   justify-content: center;
   text-align: left;
   font-size: calc(10px + 2vmin);
+}
+
+.menu {
+  display: flex;
+  background-color: blue;
+}
+
+.menu_item {
+  justify-content: center;
+}
+
+/* .logo {
+  width: 500px;
+} */
+
+.welcome {
+  margin: auto;
+  width: 600px;
 }

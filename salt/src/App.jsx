@@ -1,15 +1,20 @@
 import React, { Component } from "react";
+<<<<<<< HEAD
 import { Menu } from 'semantic-ui-react'
 import logo from "./logo.svg";
+=======
+// import logo from "./logo.svg";
+>>>>>>> saphie_branch
 import {
   Route,
   NavLink,
+  Link,
   BrowserRouter as Router,
   Switch,
   Redirect,
   withRouter
 } from "react-router-dom";
-// import { Redirect } from "react-router-dom";
+
 import "./App.css";
 import MainNavContainer from "./components/container/MainNavContainer";
 import LibraryContainer from "./components/container/LibraryContainer";
@@ -22,7 +27,8 @@ import Home from "./components/container/Home";
 import Login from "./components/Login";
 import API from "./api";
 import PlanRecipeExtractor from "./components/PlanRecipeExtractor";
-
+import { Icon, Menu } from "semantic-ui-react";
+import logo from "./components/images/logo.png";
 
 class App extends Component {
   state = {
@@ -315,47 +321,76 @@ class App extends Component {
     API.updateIngredient(ingredient).then(resp => console.log(resp));
   };
 
+  // redirect(to) {
+  //   browserHistory.push({
+  //     pathname: to
+  //   });
+  // }
 
-        
+  navBar = () => {
+    return (
+      <Menu fluid icon="labeled" className="menu">
+        <Menu.Item className="menu_item" as={Link} name="home" to="/">
+          <img className="logo" src={logo} alt="salt" />
+        </Menu.Item>
+
+        <Menu.Item className="menu_item" as={Link} name="home" to="/">
+          <Icon name="home" />
+          Home
+        </Menu.Item>
+
+        <Menu.Item className="menu_item" as={Link} name="library" to="/library">
+          <Icon name="book" />
+          Library
+        </Menu.Item>
+
+        <Menu.Item className="menu_item" as={Link} name="plans" to="/plans">
+          <Icon name="calendar alternate" />
+          Meal Plans
+        </Menu.Item>
+
+        <Menu.Item className="menu_item" as={Link} name="list" to="/list">
+          <Icon name="tasks" />
+          Shopping list
+        </Menu.Item>
+
+        {this.state.currentUser ? (
+          <Menu.Item
+            className="menu_item"
+            as={Link}
+            name="logout"
+            to="/login"
+            onClick={() => this.logout()}
+          >
+            <Icon name="user times" />
+            Log out
+          </Menu.Item>
+        ) : (
+          <Menu.Item className="menu_item" as={Link} name="login" to="/login">
+            <Icon name="user plus" />
+            Log in
+          </Menu.Item>
+        )}
+
+        <Menu.Item
+          className="menu_item"
+          as={Link}
+          name="settings"
+          to="/settings"
+        >
+          <Icon name="cog" />
+          Settings
+        </Menu.Item>
+        {/* <NavLink to="/"> Home </NavLink> */}
+      </Menu>
+    );
+  };
+
   render() {
     return (
       <div className="App">
-      <Menu className="Link" >
-        {/* <MainNavContainer
-            handleClick={this.NavController}
-            currentUserStatus={!!this.state.currentUser}
-            login={this.showLoginForm}
-            logout={this.logout}
-          /> */}
+        {this.navBar()}
 
-        {this.state.currentUser ? (
-          <Menu.Item>
-          <NavLink to="/login" onClick={() => this.logout()} className="Link">
-            Logout
-          </NavLink>
-          </Menu.Item>
-
-        ) : (
-          <Menu.Item>
-          <NavLink to="/login"  className="Link" > Login </NavLink>
-          </Menu.Item>
-        )}
-        <Menu.Item>
-        <NavLink  className="Link" to="/"> Home </NavLink>
-        </Menu.Item>
-        <Menu.Item>
-        <NavLink className="Link" to="/library"> Library </NavLink>
-        </Menu.Item>
-        <Menu.Item> 
-        <NavLink className="Link" to="/plans"> Meal Plans </NavLink>
-        </Menu.Item>
-        <Menu.Item> 
-        <NavLink className="Link" to="/list"> shopping list </NavLink>
-        </Menu.Item>
-        <Menu.Item> 
-        <NavLink className="Link" to="/settings"> settings </NavLink>
-        </Menu.Item>
-        </Menu>
         <div>
           <Route
             exact
