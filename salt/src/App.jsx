@@ -1,10 +1,4 @@
 import React, { Component } from "react";
-<<<<<<< HEAD
-import { Menu } from 'semantic-ui-react'
-import logo from "./logo.svg";
-=======
-// import logo from "./logo.svg";
->>>>>>> saphie_branch
 import {
   Route,
   NavLink,
@@ -279,17 +273,22 @@ class App extends Component {
     );
   };
 
-  deletePlan = (planId) => {
-    this.setState({ plans: this.state.plans.filter(plan => planId !== plan.id) })
-    API.deletePlan(planId)
-  }
+  deletePlan = planId => {
+    this.setState({
+      plans: this.state.plans.filter(plan => planId !== plan.id)
+    });
+    API.deletePlan(planId);
+  };
 
   addNewRecipe = recipe => {
     recipe.user_id = this.state.currentUser.id;
 
     const options = {
       method: "POST",
-      headers: { "Content-Type": "application/json", Authorization: localStorage.getItem("token")},
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("token")
+      },
       body: JSON.stringify(recipe)
     };
 
