@@ -1,3 +1,7 @@
+* {
+  font-family: "Old Standard TT", serif;
+}
+
 .list-container {
   padding: 20px;
   align-items: center;
@@ -64,6 +68,15 @@
   padding: 20px;
 }
 
+.ingredient_form {
+  width: 75%;
+  margin: auto;
+  border-radius: 8px;
+  background-color: #d0d3d4;
+  padding: 20px;
+  margin-bottom: 50px;
+}
+
 input,
 textarea,
 select {
@@ -92,6 +105,37 @@ input {
   background-color: #023b4b;
 }
 
+#add_ingredient {
+  width: 20%;
+  height: 30px;
+  display: block;
+  /* margin: 15px auto; */
+  border-radius: 5px;
+  border-color: transparent;
+  font-weight: bold;
+  font-family: "Open Sans", sans-serif;
+  color: #fff;
+  background-color: #337079;
+  margin-bottom: 20px;
+}
+
+.remove_ingredient {
+  width: 20%;
+  height: 30px;
+  display: block;
+  margin: 15px auto;
+  border-radius: 5px;
+  border-color: transparent;
+  font-weight: bold;
+  font-family: "Open Sans", sans-serif;
+  color: #fff;
+  background-color: #337079;
+}
+
 input:focus {
   outline-color: #023b4b;
+}
+
+.title {
+  font-family: "Old Standard TT", serif;
 }

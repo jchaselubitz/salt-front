@@ -62,7 +62,7 @@ class NewRecipeForm extends Component {
   render() {
     return (
       <div className="recipe-form-cont">
-        <h1>New Recipe</h1>
+        <h1 className="title">New Recipe</h1>
         <form
           onSubmit={this.handleFormSubmit}
           onChange={this.handleFieldChange}
@@ -79,7 +79,7 @@ class NewRecipeForm extends Component {
             type="url"
             fluid
             label="image"
-            placeholder="Image"
+            placeholder="Image url"
             name="image"
             value={this.state.image}
           />
@@ -93,68 +93,78 @@ class NewRecipeForm extends Component {
           />
           <br />
 
-          <h2>Ingredients</h2>
-          {this.state.ingredients.map((ingredient, index) => {
-            return (
-              <div key={index}>
-                {/* ingredient name  */}
-                <input
-                  list="ingredient_name"
-                  data-id={index}
-                  name="ingredient_name"
-                  //   value={ingredient.ingredient_name}
-                />
-                <datalist
-                  id="ingredient_name"
-                  name="ingredient_name"
-                  data-id={index}
-                >
-                  {this.props.ingredients.map(ing => (
-                    <option value={ing.name} />
-                  ))}
-                </datalist>
+          <h2 className="title">Ingredients</h2>
+          <button id="add_ingredient" onClick={this.addIngredient}>
+            Add Ingredient +
+          </button>
 
-                {/* ingredient qty */}
+          <div className="ingredient_form">
+            {this.state.ingredients.map((ingredient, index) => {
+              return (
+                <div key={index}>
+                  {/* ingredient name  */}
+                  <input
+                    placeholder="Ingredient Name"
+                    list="ingredient_name"
+                    data-id={index}
+                    name="ingredient_name"
+                    //   value={ingredient.ingredient_name}
+                  />
+                  <datalist
+                    id="ingredient_name"
+                    name="ingredient_name"
+                    data-id={index}
+                  >
+                    {this.props.ingredients.map(ing => (
+                      <option value={ing.name} />
+                    ))}
+                  </datalist>
 
-                <input
-                  type="number"
-                  fluid
-                  data-id={index}
-                  label="Qty"
-                  placeholder="Quantity"
-                  name="qty"
-                  value={ingredient.qty}
-                />
+                  {/* ingredient qty */}
 
-                {/* ingredient units */}
-                {/* <input list="units" value={ingredient.unit} /> */}
-                <select id="units" name="unit" data-id={index}>
-                  <option value="" disabled selected>
-                    units
-                  </option>
-                  {UNITS.map(unit => (
-                    <option value={unit}>{unit}</option>
-                  ))}
-                </select>
+                  <input
+                    type="number"
+                    fluid
+                    data-id={index}
+                    label="Qty"
+                    placeholder="Quantity"
+                    name="qty"
+                    value={ingredient.qty}
+                  />
 
-                {/* ingredient ingredient category */}
+                  {/* ingredient units */}
+                  {/* <input list="units" value={ingredient.unit} /> */}
+                  <select id="units" name="unit" data-id={index}>
+                    <option value="" disabled selected>
+                      units
+                    </option>
+                    {UNITS.map(unit => (
+                      <option value={unit}>{unit}</option>
+                    ))}
+                  </select>
 
-                <select name="ingredient_category" data-id={index}>
-                  <option value="" disabled selected>
-                    Ingredient category
-                  </option>
-                  {CATEGORY.map(category => (
-                    <option value={category}>{category}</option>
-                  ))}
-                </select>
+                  {/* ingredient ingredient category */}
 
-                <button onClick={() => this.removeIngredient(index)}>
-                  Remove
-                </button>
-              </div>
-            );
-          })}
-          <button onClick={this.addIngredient}>Add Ingredient</button>
+                  <select name="ingredient_category" data-id={index}>
+                    <option value="" disabled selected>
+                      Ingredient category
+                    </option>
+                    {CATEGORY.map(category => (
+                      <option value={category}>{category}</option>
+                    ))}
+                  </select>
+
+                  <button
+                    className="remove_ingredient"
+                    onClick={() => this.removeIngredient(index)}
+                  >
+                    Remove
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+
           <button className="recipe_form_submit">Submit</button>
         </form>
       </div>
