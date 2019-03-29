@@ -401,7 +401,7 @@ class App extends Component {
           <Route
             exact
             path="/plans"
-            component={() => (
+            render={() => (
               <MealPlanListContainer
                 recipes={this.state.recipes}
                 mealPlans={this.state.plans}

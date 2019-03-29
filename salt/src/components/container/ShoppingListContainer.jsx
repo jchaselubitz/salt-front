@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import RowListComponent from "../presentation/RowListComponent";
+import { Card } from "semantic-ui-react";
+import IngredientCard from "../presentation/IngredientCard"
 
 class ShoppingListContainer extends Component {
   state = {
@@ -54,7 +56,7 @@ class ShoppingListContainer extends Component {
 
   renderIngredientList = () => {
     return this.state.ingredientList.map(ingredientId => (
-      <RowListComponent ingredient={this.findIngredient(ingredientId)}  updateIngredient={this.props.updateIngredient}/>
+      <IngredientCard ingredient={this.findIngredient(ingredientId)}  updateIngredient={this.props.updateIngredient}/>
     ))
   }
 
@@ -62,7 +64,8 @@ class ShoppingListContainer extends Component {
     const plans = this.props.mealPlans.filter(plan => plan.recipes.length > 0);
 
     return (
-      <div>
+      <>
+      <div className="text-container">
         <select onChange={this.updateCurrentPlan} name="plan">
           <option value={undefined} disabled selected>
             select a meal plan
@@ -71,8 +74,12 @@ class ShoppingListContainer extends Component {
             <option value={plan.id}>{plan.start_date}</option>
           ))}
         </select>
-        {this.state.ingredientList && this.renderIngredientList()}
       </div>
+      <Card.Group>
+        {this.state.ingredientList && this.renderIngredientList()}
+      </Card.Group>
+      
+      </>
     );
   }
 }

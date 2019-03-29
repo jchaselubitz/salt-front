@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import RecipeBlockListComponent from './RecipeBlockListComponent';
+import PlanRecipeBlockListComponent from './PlanRecipeBlockListComponent';
 
 //BREADCRUMBS
 // app > MealPlanListContainer
@@ -56,7 +56,7 @@ class CreatePlanForm extends Component {
           <input type="submit"/>
         </form>
         <div>
-          <RecipeBlockListComponent recipes={this.props.recipes} handleClick={this.AddRecipeToPlan}/> 
+          <PlanRecipeBlockListComponent recipes={this.props.recipes} handleClick={this.AddRecipeToPlan}/> 
         </div>
       </div>
       </>
