@@ -38,6 +38,7 @@ class MealPlanListContainer extends Component {
           <PlanBlockList
             mealPlans={this.props.mealPlans}
             ShowPlanDetails={this.props.ShowPlanDetails}
+            delete={this.props.delete}
           />
         )}
       </div>
