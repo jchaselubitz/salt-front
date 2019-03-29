@@ -23,19 +23,21 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="login_page" className="account-form-container">
-        <h2>Log In</h2>
-        <Form onSubmit={this.login}>
-          <Form.Field>
-            <label>Email Address:</label>
-            <input type="text" name="email" />
-          </Form.Field>
-          <Form.Field>
-            <label>Password:</label>
-            <input type="text" name="password" />
-          </Form.Field>
-          <Button value="submit">Log In</Button>
-        </Form>
+      <div className="login_page">
+        <div className="login_form">
+          <h2>Log In</h2>
+          <Form onSubmit={this.login}>
+            <Form.Field>
+              <label>Email Address:</label>
+              <input type="text" name="email" />
+            </Form.Field>
+            <Form.Field>
+              <label>Password:</label>
+              <input type="text" name="password" />
+            </Form.Field>
+            <Button value="submit">Log In</Button>
+          </Form>
+        </div>
       </div>
     );
   }

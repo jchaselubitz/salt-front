@@ -5,7 +5,7 @@ class Home extends Component {
   state = {};
   render() {
     return (
-      <div>
+      <div className="home_div">
         <img className="welcome" src={welcome} alt="welcome to salt" />
       </div>
     );
