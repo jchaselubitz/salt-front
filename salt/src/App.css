@@ -7,10 +7,8 @@
   padding: 20px;
 }
 
-
 .Link {
   color: #023b4b;
-
 }
 
 @keyframes App-logo-spin {
@@ -56,4 +54,44 @@
 .welcome {
   margin: auto;
   width: 600px;
+}
+
+.recipe-form-cont {
+  width: 80%;
+  margin: auto;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+input,
+textarea,
+select {
+  width: 90%;
+  height: 30px;
+  display: block;
+  margin: 15px auto;
+  border-radius: 5px;
+  border-color: transparent;
+  font-weight: bold;
+  font-family: "Open Sans", sans-serif;
+}
+input {
+  text-indent: 20px;
+}
+.recipe_form_submit {
+  width: 90%;
+  height: 30px;
+  display: block;
+  margin: 15px auto;
+  border-radius: 5px;
+  border-color: transparent;
+  font-weight: bold;
+  font-family: "Open Sans", sans-serif;
+  color: #fff;
+  background-color: #023b4b;
+}
+
+input:focus {
+  outline-color: #023b4b;
 }
