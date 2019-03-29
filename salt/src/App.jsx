@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { Menu } from 'semantic-ui-react'
-import logo from "./logo.svg";
 
 import {
   Route,
