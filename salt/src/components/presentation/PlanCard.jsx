@@ -8,8 +8,8 @@ const PlanCard = props => {
     let monthName = ["January", "February", "March", "April", "May", "June",
                  "July", "August", "September", "October", "November", "December"]
     return `${dayOfWeek[start_date.getDay()-1]}, ${monthName[start_date.getMonth()-1]} ${start_date.getDate()}`
-
   }
+  
   return (
     <Card fluid color="blue" onClick={() => props.handleClick(props.mealPlan.id, "Plan")}>
     <Card.Content>
