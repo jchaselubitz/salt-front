@@ -11,6 +11,10 @@
   padding: 20px;
 }
 
+.shopping-list {
+  padding: 40px;
+}
+
 .Link {
   color: #023b4b;
 }
@@ -66,14 +70,17 @@
   border-radius: 8px;
   background-color: white;
   padding: 80px;
-  /* margin-top: 25%; */
+  margin-top: 18%;
 }
 
 .login_page {
-  height: 600vh;
+  height: 100vh;
+  width: auto;
   background-image: url("components/images/mike-kenneally-345257-unsplash.jpg");
+  background-position: center;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
+  padding: 50px;
 }
 
 .home_div {

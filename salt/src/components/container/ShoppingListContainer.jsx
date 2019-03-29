@@ -77,7 +77,7 @@ class ShoppingListContainer extends Component {
 
     return (
       <>
-      <div className="text-container">
+      <div >
         <select onChange={this.updateCurrentPlan} name="plan">
           <option value={undefined} disabled selected>
             select a meal plan
@@ -87,7 +87,7 @@ class ShoppingListContainer extends Component {
           ))}
         </select>
       </div>
-      <Card.Group>
+      <Card.Group className="shopping-list" >
         {this.state.ingredientList && this.renderIngredientList()}
       </Card.Group>
       
