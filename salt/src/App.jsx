@@ -21,7 +21,7 @@ import Home from "./components/container/Home";
 import Login from "./components/Login";
 import API from "./api";
 import PlanRecipeExtractor from "./components/PlanRecipeExtractor";
-import { Icon, Menu } from "semantic-ui-react";
+import { Icon, Menu, Divider } from "semantic-ui-react";
 import logo from "./components/images/logo.png";
 
 class App extends Component {
@@ -291,10 +291,11 @@ class App extends Component {
 
   navBar = () => {
     return (
-      <Menu fluid horizonal icon="labeled" className="menu">
-        <Menu.Item className="menu_item" as={Link} name="home" to="/">
-          <img className="logo" src={logo} alt="salt" />
-        </Menu.Item>
+      <Menu secondary fluid horizonal icon="labeled" className="menu">
+        <img className="logo" src={logo} alt="salt" />
+        {/* <Menu.Item className="menu_item" as={Link} name="home" to="/">
+        
+        </Menu.Item> */}
 
         <Menu.Item className="menu_item" as={Link} name="home" to="/">
           <Icon name="home" />
@@ -351,8 +352,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {this.navBar()}
-
+        <div className="nav_bar">{this.navBar()}</div>
         <div>
           <Route
             exact

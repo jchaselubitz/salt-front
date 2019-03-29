@@ -30,17 +30,17 @@
 .have-ingredient-true {
 }
 
-.account-form-container {
-  background-color: #ffffff;
-  min-height: 30vh;
-  /* max-height: 600vh; */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* .account-form-container {
+  background-image: url("components/images/mike-kenneally-345257-unsplash.jpg"); */
+/* background-size: contain;
+  height: 600vh;
+  display: flex; */
+
+/* align-items: center;
   justify-content: center;
   text-align: left;
   font-size: calc(10px + 2vmin);
-}
+}  */
 
 .menu {
   display: flex;
@@ -51,13 +51,40 @@
   justify-content: center;
 }
 
-/* .logo {
-  width: 500px;
-} */
+.logo {
+  width: 200px;
+  height: 100px;
+  padding-right: 20px;
+}
+
+.nav_bar {
+}
+
+.login_form {
+  width: 50%;
+  margin: auto;
+  border-radius: 8px;
+  background-color: white;
+  padding: 80px;
+  /* margin-top: 25%; */
+}
+
+.login_page {
+  height: 600vh;
+  background-image: url("components/images/mike-kenneally-345257-unsplash.jpg");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.home_div {
+  display: flex;
+  /* background-image: url("components/images/mike-kenneally-345257-unsplash.jpg");
+  background-size: contain; */
+}
 
 .welcome {
   margin: auto;
-  width: 600px;
+  width: 800px;
 }
 
 .recipe-form-cont {
