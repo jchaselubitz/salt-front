@@ -29,7 +29,7 @@ class MealPlanListContainer extends Component {
 
   render() {
     return (
-      <div className="list-container" >
+      <div className="list-container">
         {/* <ContainerNavComponent />; */}
         <button onClick={this.createFormShowHide}>Create New</button>
         {this.state.createNew ? (

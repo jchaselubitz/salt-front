@@ -1,3 +1,7 @@
+* {
+  font-family: "Old Standard TT", serif;
+}
+
 .list-container {
   padding: 20px;
   align-items: center;
@@ -7,10 +11,8 @@
   padding: 20px;
 }
 
-
 .Link {
   color: #023b4b;
-
 }
 
 @keyframes App-logo-spin {
@@ -56,4 +58,91 @@
 .welcome {
   margin: auto;
   width: 600px;
+}
+
+.recipe-form-cont {
+  width: 80%;
+  margin: auto;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+.ingredient_form {
+  width: 75%;
+  margin: auto;
+  border-radius: 8px;
+  background-color: #d0d3d4;
+  padding: 20px;
+  margin-bottom: 50px;
+}
+
+input,
+textarea,
+select {
+  width: 90%;
+  height: 30px;
+  display: block;
+  margin: 15px auto;
+  border-radius: 5px;
+  border-color: transparent;
+  font-weight: bold;
+  font-family: "Open Sans", sans-serif;
+}
+input {
+  text-indent: 20px;
+}
+.recipe_form_submit {
+  width: 90%;
+  height: 30px;
+  display: block;
+  margin: 15px auto;
+  border-radius: 5px;
+  border-color: transparent;
+  font-weight: bold;
+  font-family: "Open Sans", sans-serif;
+  color: #fff;
+  background-color: #023b4b;
+}
+
+#add_ingredient {
+  width: 20%;
+  height: 30px;
+  display: block;
+  /* margin: 15px auto; */
+  border-radius: 5px;
+  border-color: transparent;
+  font-weight: bold;
+  font-family: "Open Sans", sans-serif;
+  color: #fff;
+  background-color: #337079;
+  margin-bottom: 20px;
+}
+
+.remove_ingredient {
+  width: 20%;
+  height: 30px;
+  display: block;
+  margin: 15px auto;
+  border-radius: 5px;
+  border-color: transparent;
+  font-weight: bold;
+  font-family: "Open Sans", sans-serif;
+  color: #fff;
+  background-color: #337079;
+}
+
+input:focus {
+  outline-color: #023b4b;
+}
+
+.title {
+  font-family: "Old Standard TT", serif;
+}
+
+.plan_list {
+  margin-top: 50px;
+}
+
+.login_page {
 }
