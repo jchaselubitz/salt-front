@@ -1,10 +1,7 @@
 import React, { Component } from "react";
-<<<<<<< HEAD
 import { Menu } from 'semantic-ui-react'
 import logo from "./logo.svg";
-=======
-// import logo from "./logo.svg";
->>>>>>> saphie_branch
+
 import {
   Route,
   NavLink,
