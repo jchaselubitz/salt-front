@@ -60,6 +60,18 @@ class ShoppingListContainer extends Component {
     ))
   }
 
+ MakesPrettyDate = (date) => {
+  const start_date = new Date(date)
+  const prettyDate = () => {
+      let dayOfWeek =  ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"]
+      let monthName = ["January", "February", "March", "April", "May", "June",
+                   "July", "August", "September", "October", "November", "December"]
+      return `${dayOfWeek[start_date.getDay()-1]}, ${monthName[start_date.getMonth()-1]} ${start_date.getDate()}`
+  }
+  return prettyDate()
+ }
+
+
   render() {
     const plans = this.props.mealPlans.filter(plan => plan.recipes.length > 0);
 
@@ -71,7 +83,7 @@ class ShoppingListContainer extends Component {
             select a meal plan
           </option>
           {plans.map(plan => (
-            <option value={plan.id}>{plan.start_date}</option>
+            <option value={plan.id}>{this.MakesPrettyDate(plan.start_date)}</option>
           ))}
         </select>
       </div>
